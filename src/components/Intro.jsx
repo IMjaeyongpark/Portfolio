@@ -6,7 +6,9 @@ export default function Intro() {
     <section id="top" className="page-container flex min-h-[92vh] items-center pt-20">
       <div className="max-w-4xl py-20">
         <div className="eyebrow"><span className="size-1.5 rounded-full bg-lime shadow-[0_0_14px_#bcff54]" />{portfolio.role}</div>
-        <h1 className="whitespace-pre-line text-[clamp(2.8rem,8vw,6.7rem)] leading-[0.96] font-semibold tracking-[-0.065em] text-[#d2d5d8]">{portfolio.intro}</h1>
+        <h1 className="text-[clamp(1.25rem,6.25vw,5rem)] leading-[1.02] font-semibold tracking-[-0.055em] text-[#d2d5d8]">
+          {portfolio.intro.split('\n').map((line) => <span key={line} className="block whitespace-nowrap">{line}</span>)}
+        </h1>
         <div className="mt-8 flex flex-col items-start gap-7 sm:mt-10 sm:flex-row sm:items-center">
           <p className="max-w-md text-sm leading-7 text-muted sm:text-base">{portfolio.supportingText}</p>
           <div className="flex flex-wrap gap-3">
