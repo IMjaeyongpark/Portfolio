@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1b1e22;
+  --color-panel: #25292e;
+  --color-line: #444a52;
+  --color-muted: #b6bbc2;
+  --color-lime: #bcff54;
+  --font-sans: "Pretendard Variable", Pretendard, Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: #1b1e22; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+
+@layer components {
+  .page-container { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .section-space { @apply py-20 sm:py-28; }
+  .eyebrow { @apply mb-4 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-lime uppercase; }
+  .section-title { @apply text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl; }
+  .section-copy { @apply mt-4 max-w-xl text-sm leading-7 text-muted sm:text-base; }
+  .card { @apply border border-line bg-panel/80; }
+  .focus-ring { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime; }
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(12px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-enter { animation: modal-in .18s ease-out; }

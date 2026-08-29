@@ -1,0 +1,130 @@
+import gitopsArchitecture from '../assets/projects/gitops-architecture.png'
+import gitopsPipeline from '../assets/projects/gitops-pipeline.png'
+
+export const projects = [
+  {
+    tone: 'lime',
+    title: 'GitOps DevOps Environment',
+    description: 'Kubernetes 기반 GitOps CI/CD 파이프라인 구축',
+    period: '2026.06 — 진행 중',
+    skills: ['GCP', 'Kubernetes', 'Jenkins', 'Nexus', 'Argo CD', 'Helm', 'Prometheus', 'Grafana'],
+    purpose: 'GCP VM에 Kubernetes 클러스터를 구성하고, 소스 변경부터 배포와 모니터링까지 연결되는 GitOps 기반 DevOps 환경을 구축하는 프로젝트입니다.',
+    role: [
+      'GCP VM 기반 Kubernetes 클러스터 구성',
+      'Jenkins·Nexus 기반 CI Pipeline 구축',
+      'Argo CD·Helm 기반 GitOps 자동 배포 구성',
+      'Prometheus·Grafana 모니터링 환경 구성',
+    ],
+    details: [
+      'GitHub App으로 Jenkins와 GitHub Repository를 연동해 소스 변경을 감지합니다.',
+      'Jenkins가 Application Build, Docker Image 생성, Nexus Registry Push를 수행하도록 구성했습니다.',
+      'Helm Chart로 Kubernetes 배포 설정을 관리하고 Argo CD가 Git 변경을 감지해 자동 배포하도록 연결했습니다.',
+    ],
+    troubleshooting: [],
+    github: '',
+    links: [
+      { label: 'Project Article', url: 'https://undergrounddev.tistory.com/19' },
+      { label: 'Figma', url: 'https://www.figma.com/design/5l6SJI7bQfSXs783Fsslby/Untitled?node-id=0-1&t=HSZxkm7IFNteKsCM-1' },
+    ],
+    architecture: gitopsArchitecture,
+    architectureAlt: 'GCP Kubernetes, Jenkins, Nexus, Argo CD, Prometheus, Grafana로 구성한 GitOps CI/CD Architecture',
+    images: [
+      {
+        src: gitopsPipeline,
+        alt: 'Code Push부터 Jenkins CI, Nexus Image Push, Argo CD Sync, Kubernetes 배포, Monitoring으로 이어지는 Pipeline',
+        caption: 'GitOps CI/CD Pipeline',
+      },
+    ],
+  },
+  {
+    tone: 'blue',
+    title: 'GIS & 3D Building Service',
+    description: 'GIS·3D 건물정보 서비스 유지보수와 클라우드 배포',
+    period: '2026.03 — 2026.05',
+    skills: ['NestJS', 'VWorld API', 'Docker', 'Kubernetes', 'Helm', 'KT Cloud', 'Nginx', 'NFS'],
+    purpose: '건축물대장정보 기반 GIS 및 IFS 기반 3D 건물정보 서비스를 안정화하고, 공공 KT Cloud Kubernetes 환경에 배포했습니다.',
+    role: [
+      'NestJS Backend 분석 및 하자보수',
+      'VWorld WFS 데이터 3종 Proxy 연동',
+      'KT Cloud Kubernetes·Helm 배포',
+      'On-premise Server 용량 문제 분석 및 개선',
+    ],
+    details: [
+      'VWorld API로 건축물대장정보 관련 WFS 데이터 3종을 Proxy 방식으로 연동했습니다.',
+      'Kubernetes와 Helm으로 Container 기반 배포 구조를 구성하고 Cloud 운영 환경을 마련했습니다.',
+      'AI 개발 도구로 낯선 NestJS Codebase를 빠르게 파악하고 필요한 기능을 구현했습니다.',
+    ],
+    troubleshooting: [
+      {
+        problem: '500GB 파일 저장 디렉터리의 사용률이 약 98%에 도달해 서비스 중단 위험이 발생했습니다.',
+        solution: '파일 생성·조회 구조와 관련 Table을 분석해 실제 서비스는 최신 파일만 사용함을 확인했습니다. 다른 서버의 저장 공간을 NFS로 연결하고 과거 파일을 ZIP으로 압축해 별도 백업 디렉터리에 관리했습니다.',
+        result: '기존 기능과 파일 조회를 유지하면서 저장 디렉터리 사용률을 약 98%에서 20% 수준으로 낮춰습니다.',
+      },
+    ],
+    github: '',
+    architecture: '',
+    architectureAlt: '',
+    images: [],
+  },
+  {
+    tone: 'violet',
+    title: 'Public Data Open API',
+    description: '공공데이터 수집·가공·개방을 위한 ETL과 API 운영 시스템',
+    period: '2025.10 — 2026.05',
+    skills: ['Spring Boot', 'Spring Batch', 'PostgreSQL', 'Docker', 'Rocky Linux', 'React', 'Nginx'],
+    purpose: '활용 가능한 공공데이터를 수집·가공해 시스템을 구축하고, 공공데이터포털에 Open API로 등록·개방한 프로젝트입니다.',
+    role: [
+      'Spring Batch 기반 대용량 ETL Scheduling 구축',
+      'Docker·Rocky Linux 환경 서비스 배포·운영',
+      'React 기반 API Data 관리 화면 개발',
+      'Nginx Proxy와 API Routing 운영',
+    ],
+    details: [
+      'Spring Batch로 대용량 데이터의 수집·정제·적재 작업을 Scheduling했습니다.',
+      'React로 API Data를 조회하고 관리할 수 있는 운영 화면을 개발했습니다.',
+      'DMZ·내부망 분리 환경에서 Nginx Reverse Proxy로 Traffic을 중계하고, Network·Port·Firewall 설정을 확인하며 연동 이슈에 대응했습니다.',
+      '개방된 API의 운영 이슈에 대응하고 기능을 개선하며 서비스 안정성을 유지했습니다.',
+    ],
+    troubleshooting: [],
+    github: '',
+    architecture: '',
+    architectureAlt: '',
+    images: [],
+  },
+  {
+    tone: 'orange',
+    title: 'My Streaming Partner',
+    description: '3개 방송 플랫폼 채팅 통합과 AI 감정 분석 서비스',
+    period: '2023.03 — 2024.06',
+    skills: ['Spring Boot', 'Flask', 'Python', 'SSE', 'JWT', 'PostgreSQL', 'MongoDB Atlas', 'AWS EC2', 'GitHub Actions'],
+    purpose: '유튜브·치지직·숲의 실시간 채팅을 하나로 통합하고, AI 감정 분석으로 방송 분위기와 하이라이트를 파악할 수 있는 플랫폼을 개발했습니다.',
+    role: [
+      'Spring Boot 기반 Backend System 구축',
+      'Flask·SSE 기반 실시간 채팅 통합 API 설계·구현',
+      'JWT Authentication과 Database 설계·구축',
+      'AWS EC2·GitHub Actions CI/CD 구축',
+    ],
+    details: [
+      '유튜브·치지직·숲 채팅을 동시 처리하는 통합 API를 직접 설계·구현했습니다.',
+      'SSE로 실시간 채팅과 AI 감정 분석 데이터를 Client에 단방향 전송했습니다.',
+      'MongoDB Atlas, PostgreSQL, AWS RDS를 활용해 데이터 성격에 맞는 저장 구조를 설계했습니다.',
+      '결과물을 바탕으로 논문 3편을 작성했고, 교내외 공모전에서 대상을 포함해 총 10회 수상했습니다.',
+    ],
+    troubleshooting: [
+      {
+        problem: '서로 다른 방식으로 제공되는 3개 방송 플랫폼의 채팅을 하나의 화면에 실시간으로 전달해야 했습니다.',
+        solution: '플랫폼별 채팅 수집 로직을 Flask API에서 통합하고, 공통 형식으로 변환한 데이터를 SSE로 Client에 전송하도록 구성했습니다.',
+        result: '유튜브·치지직·숲 채팅을 동시에 확인하고 AI 감정 분석과 연계할 수 있는 실시간 채팅 시스템을 구축했습니다.',
+      },
+    ],
+    github: '',
+    links: [
+      { label: 'Spring Backend', url: 'https://github.com/IMjaeyongpark/MyBroadcastPartner-Spring' },
+      { label: 'Flask Chat API', url: 'https://github.com/IMjaeyongpark/MyBroadcastPartner-Flask' },
+      { label: 'Demo Video', url: 'https://www.youtube.com/watch?v=g4iZemAs8WM' },
+    ],
+    architecture: '',
+    architectureAlt: '',
+    images: [],
+  },
+]
