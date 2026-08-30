@@ -72,7 +72,7 @@ src/
 
 | 수정 내용 | 파일 |
 | --- | --- |
-| 상단 Brand, Intro, Blog·Notion·GitHub | `src/data/portfolio.js` |
+| 상단 Brand, Intro, Blog·GitHub | `src/data/portfolio.js` |
 | Skill Category와 기술 | `src/data/skills.js` |
 | 주요 Project | `src/data/projects.js` |
 | Mini Project | `src/data/miniProjects.js` |

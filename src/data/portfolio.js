@@ -7,7 +7,6 @@ export const portfolio = {
   github: '',
   links: [
     { label: 'Tech Blog', url: 'https://undergrounddev.tistory.com/' },
-    { label: 'Notion', url: 'https://app.notion.com/p/756db696d69883988c97818dab36e130?source=copy_link' },
   ],
 }
 
