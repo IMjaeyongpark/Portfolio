@@ -1,6 +1,6 @@
 # Developer Portfolio
 
-**배포 사이트:** [portfolio-jaeyong2.vercel.app](https://portfolio-jaeyong2.vercel.app/)
+**배포 사이트:** [portfolio-seven-weld-x1la11m2lm.vercel.app](https://portfolio-seven-weld-x1la11m2lm.vercel.app/)
 
 백엔드 개발과 DevOps 경험을 중심으로 구성한 박재용의 원 페이지 포트폴리오입니다. 모든 콘텐츠를 `src/data` 파일에서 관리하며, 별도 서버 없이 Vercel에 정적 사이트로 배포합니다.
 
