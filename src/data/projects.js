@@ -1,12 +1,17 @@
 import gitopsArchitecture from '../assets/projects/gitops-architecture.png'
 import gitopsPipeline from '../assets/projects/gitops-pipeline.png'
 
-export const projects = [
+const getPeriodDates = (period) => {
+  const dates = period.match(/\d{4}\.\d{2}/g) ?? []
+  return dates.map((date) => Number(date.replace('.', '')))
+}
+
+const projectItems = [
   {
     tone: 'lime',
     title: 'GitOps DevOps Environment',
     description: 'Kubernetes 기반 GitOps CI/CD 파이프라인 구축',
-    period: '2026.06 — 진행 중',
+    period: '2026.06 — 2026.08',
     skills: ['GCP', 'Kubernetes', 'Jenkins', 'Nexus', 'Argo CD', 'Helm', 'Prometheus', 'Grafana'],
     purpose: 'GCP VM에 Kubernetes 클러스터를 구성하고, 소스 변경부터 배포와 모니터링까지 연결되는 GitOps 기반 DevOps 환경을 구축하는 프로젝트입니다.',
     role: [
@@ -23,6 +28,8 @@ export const projects = [
     troubleshooting: [],
     github: '',
     links: [
+      { label: 'Application', url: 'https://github.com/IMjaeyongpark/deploy-history-app' },
+      { label: 'Manifest', url: 'https://github.com/IMjaeyongpark/deploy-history-manifest' },
       { label: 'Project Article', url: 'https://undergrounddev.tistory.com/19' },
       { label: 'Figma', url: 'https://www.figma.com/design/5l6SJI7bQfSXs783Fsslby/Untitled?node-id=0-1&t=HSZxkm7IFNteKsCM-1' },
     ],
@@ -39,28 +46,23 @@ export const projects = [
   {
     tone: 'blue',
     title: 'GIS & 3D Building Service',
-    description: 'GIS·3D 건물정보 서비스 유지보수와 클라우드 배포',
+    description: '온프레미스 MSA의 KT Cloud Kubernetes 이전과 GIS·3D 건물정보 서비스 유지보수',
     period: '2026.03 — 2026.05',
-    skills: ['NestJS', 'VWorld API', 'Docker', 'Kubernetes', 'Helm', 'KT Cloud', 'Nginx', 'NFS'],
-    purpose: '건축물대장정보 기반 GIS 및 IFS 기반 3D 건물정보 서비스를 안정화하고, 공공 KT Cloud Kubernetes 환경에 배포했습니다.',
+    skills: ['NestJS', 'VWorld API', 'Docker', 'Kubernetes', 'Helm', 'KT Cloud', 'Nginx'],
+    purpose: '온프레미스 서버에서 Docker Compose로 운영되던 MSA 기반 GIS·3D 건물정보 서비스를 KT Cloud Kubernetes 환경으로 이전하고 안정적인 배포·운영 구조를 마련했습니다.',
     role: [
       'NestJS Backend 분석 및 하자보수',
       'VWorld WFS 데이터 3종 Proxy 연동',
-      'KT Cloud Kubernetes·Helm 배포',
-      'On-premise Server 용량 문제 분석 및 개선',
+      '기존 Docker Compose 기반 MSA 구조 분석',
+      'KT Cloud Kubernetes·Helm 배포 환경 구성',
     ],
     details: [
       'VWorld API로 건축물대장정보 관련 WFS 데이터 3종을 Proxy 방식으로 연동했습니다.',
-      'Kubernetes와 Helm으로 Container 기반 배포 구조를 구성하고 Cloud 운영 환경을 마련했습니다.',
+      '온프레미스의 Docker Compose 설정과 MSA 서비스 구조를 분석해 Kubernetes Resource로 전환했습니다.',
+      'Helm Chart로 서비스별 배포 설정을 관리하고 KT Cloud Kubernetes 환경에 MSA를 배포했습니다.',
       'AI 개발 도구로 낯선 NestJS Codebase를 빠르게 파악하고 필요한 기능을 구현했습니다.',
     ],
-    troubleshooting: [
-      {
-        problem: '500GB 파일 저장 디렉터리의 사용률이 약 98%에 도달해 서비스 중단 위험이 발생했습니다.',
-        solution: '파일 생성·조회 구조와 관련 Table을 분석해 실제 서비스는 최신 파일만 사용함을 확인했습니다. 다른 서버의 저장 공간을 NFS로 연결하고 과거 파일을 ZIP으로 압축해 별도 백업 디렉터리에 관리했습니다.',
-        result: '기존 기능과 파일 조회를 유지하면서 저장 디렉터리 사용률을 약 98%에서 20% 수준으로 낮춰습니다.',
-      },
-    ],
+    troubleshooting: [],
     github: '',
     architecture: '',
     architectureAlt: '',
@@ -85,7 +87,13 @@ export const projects = [
       'DMZ·내부망 분리 환경에서 Nginx Reverse Proxy로 Traffic을 중계하고, Network·Port·Firewall 설정을 확인하며 연동 이슈에 대응했습니다.',
       '개방된 API의 운영 이슈에 대응하고 기능을 개선하며 서비스 안정성을 유지했습니다.',
     ],
-    troubleshooting: [],
+    troubleshooting: [
+      {
+        problem: '40억 건 이상의 데이터가 저장된 테이블 조회에 1분 이상이 소요되어 HTTP 504 Gateway Timeout이 발생했습니다.',
+        solution: '주요 조회 조건과 사용 패턴을 기준으로 필요한 컬럼에 인덱스를 적용해 대용량 테이블의 조회 성능을 개선했습니다.',
+        result: '1분 이상 걸리던 조회 시간을 3초 이하로 단축하고 API 타임아웃을 해소했습니다.',
+      },
+    ],
     github: '',
     architecture: '',
     architectureAlt: '',
@@ -93,6 +101,41 @@ export const projects = [
   },
   {
     tone: 'orange',
+    title: '국립공원 데이터뱅크 하자보수',
+    description: '대용량 공원 데이터의 정기 추출·다운로드 기능 개선과 저장공간 안정화',
+    period: '2026.02 — 2026.08',
+    skills: ['Spring', 'JSP', 'PostgreSQL', 'Spring Batch', 'NFS'],
+    purpose: 'PostgreSQL 테이블에 적재된 국립공원 데이터를 주기적으로 파일로 생성하고, 사용자가 웹에서 다운로드할 수 있는 데이터뱅크 시스템을 하자보수했습니다.',
+    role: [
+      'Spring·JSP 기반 기존 System 구조 분석 및 하자보수',
+      'Spring Batch 기반 정기 Data Export 기능 개선',
+      '대용량 CSV 분할·ZIP Download 구조 구성',
+      'NFS 기반 파일 저장공간 확장 및 관리',
+    ],
+    details: [
+      'Spring Batch가 PostgreSQL 테이블의 데이터를 주기적으로 추출해 CSV 파일을 생성하도록 구성했습니다.',
+      'JSP 기반 웹 화면에서 사용자가 생성된 데이터 파일을 조회하고 다운로드할 수 있도록 기존 기능을 분석·개선했습니다.',
+      '파일 생성·조회 흐름과 관련 데이터베이스 테이블 구조를 파악해 대용량 파일 처리 방식을 개선했습니다.',
+    ],
+    troubleshooting: [
+      {
+        problem: '약 300만 건의 데이터를 하나의 CSV 파일로 생성해 Excel에서 열 경우, Excel의 최대 행 제한을 초과해 전체 데이터를 확인할 수 없었습니다.',
+        solution: '데이터를 50만 건 단위의 여러 CSV 파일로 분할 생성하고, 생성된 파일을 하나의 ZIP 파일로 압축해 다운로드하도록 구조를 변경했습니다.',
+        result: 'Excel에서 각 파일을 정상적으로 열어 전체 데이터를 확인할 수 있게 했고, 대용량 데이터의 다운로드 편의성을 개선했습니다.',
+      },
+      {
+        problem: '500GB 파일 저장 디렉터리의 사용률이 약 98%에 도달해 정기 파일 생성과 서비스 운영에 영향을 줄 위험이 있었습니다.',
+        solution: '다른 서버의 저장공간을 NFS로 연결해 용량을 확보한 뒤, 파일 생성·조회 구조와 관련 테이블을 분석했습니다. 서비스에서는 최신 파일만 사용하는 것을 확인하고 과거 파일을 압축해 별도 백업 디렉터리에 관리했습니다.',
+        result: '기존 파일 조회 기능을 유지하면서 저장 디렉터리 사용률을 약 98%에서 20% 수준으로 낮춰 안정적인 파일 생성 공간을 확보했습니다.',
+      },
+    ],
+    github: '',
+    architecture: '',
+    architectureAlt: '',
+    images: [],
+  },
+  {
+    tone: 'cyan',
     title: 'My Streaming Partner',
     description: '3개 방송 플랫폼 채팅 통합과 AI 감정 분석 서비스',
     period: '2023.03 — 2024.06',
@@ -123,8 +166,22 @@ export const projects = [
       { label: 'Flask Chat API', url: 'https://github.com/IMjaeyongpark/MyBroadcastPartner-Flask' },
       { label: 'Demo Video', url: 'https://www.youtube.com/watch?v=g4iZemAs8WM' },
     ],
+    video: {
+      youtubeId: 'g4iZemAs8WM',
+      title: '라이브 채팅 감정 분석 기술 프로젝트 소개 영상',
+    },
     architecture: '',
     architectureAlt: '',
     images: [],
   },
 ]
+
+export const projects = projectItems.sort((a, b) => {
+  const aDates = getPeriodDates(a.period)
+  const bDates = getPeriodDates(b.period)
+  const endDateDifference = (bDates.at(-1) ?? 0) - (aDates.at(-1) ?? 0)
+
+  if (endDateDifference !== 0) return endDateDifference
+
+  return (bDates[0] ?? 0) - (aDates[0] ?? 0)
+})

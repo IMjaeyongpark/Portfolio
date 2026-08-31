@@ -116,6 +116,10 @@ import pipelineImage from '../assets/projects/pipeline.png'
       caption: 'CI/CD Pipeline',
     },
   ],
+  video: {
+    youtubeId: 'YouTube 영상 ID',
+    title: '영상 접근성 설명',
+  },
 }
 ```
 
@@ -127,6 +131,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
 - `troubleshooting`: 내용이 없으면 `[]`로 두며 Section이 자동으로 숨겨집니다.
 - `architecture`: 없으면 `''`로 지정합니다.
 - `images`: 없으면 `[]`로 지정합니다. 여러 장을 넣으면 Responsive Gallery로 표시됩니다.
+- `video`: YouTube 영상을 상세창에서 바로 재생하려면 `youtubeId`와 `title`을 지정합니다. 영상이 없으면 생략합니다.
 
 Image는 외부 URL에 직접 연결하기보다 `src/assets/projects/`에 저장한 뒤 import하는 방식을 권장합니다.
 

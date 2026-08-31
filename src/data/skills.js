@@ -1,5 +1,5 @@
 export const skillGroups = [
-  { category: 'Backend', skills: ['Java', 'Spring Boot', 'Spring Batch', 'Python', 'Flask', 'NestJS'] },
+  { category: 'Backend', skills: ['Java', 'Spring Boot', 'Spring', 'Spring Batch', 'Python', 'Flask'] },
   { category: 'Database', skills: ['PostgreSQL', 'MongoDB Atlas', 'AWS RDS'] },
   { category: 'DevOps', skills: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'Argo CD', 'Helm', 'Nexus'] },
   { category: 'Server / Network', skills: ['Nginx', 'Linux', 'Rocky Linux', 'NFS', 'Reverse Proxy'] },

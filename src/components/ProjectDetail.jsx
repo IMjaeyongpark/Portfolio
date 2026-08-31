@@ -56,6 +56,25 @@ export default function ProjectDetail({ project, onClose }) {
           <DetailSection number="03" title="주요 구현"><ul className="space-y-3">{project.details.map((item) => <li key={item} className="flex gap-3"><span className="mt-2.5 font-mono text-[10px] text-white/35">—</span>{item}</li>)}</ul></DetailSection>
           {project.troubleshooting?.length > 0 && <DetailSection number="04" title="트러블슈팅"><div className="space-y-8">{project.troubleshooting.map((item, index) => <div key={`${item.problem}-${index}`} className="space-y-4"><div><span className="text-[10px] font-semibold tracking-wider text-white/35 uppercase">Problem</span><p className="mt-1">{item.problem}</p></div><div><span className="text-[10px] font-semibold tracking-wider text-white/35 uppercase">Solution</span><p className="mt-1">{item.solution}</p></div><div className="border-l-2 border-lime bg-lime/[0.04] px-4 py-3"><span className="text-[10px] font-semibold tracking-wider text-lime uppercase">Result</span><p className="mt-1 text-[#d6d9db]">{item.result}</p></div></div>)}</div></DetailSection>}
           {projectLinks.length > 0 && <div className="mt-8 flex flex-wrap gap-3">{projectLinks.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="focus-ring inline-flex items-center gap-2 border border-white bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-lime hover:bg-lime"><Icon name="github" size={17} /> {link.label} <Icon name="external" size={14} /></a>)}</div>}
+          {project.video?.youtubeId && (
+            <section className="mt-10" aria-labelledby="project-video-title">
+              <div className="mb-4 flex items-end justify-between gap-4">
+                <h3 id="project-video-title" className="text-sm font-semibold text-white">Project Video</h3>
+                <span className="font-mono text-[10px] text-muted">YOUTUBE</span>
+              </div>
+              <div className="aspect-video overflow-hidden border border-line bg-black">
+                <iframe
+                  className="h-full w-full"
+                  src={`https://www.youtube-nocookie.com/embed/${project.video.youtubeId}`}
+                  title={project.video.title || `${project.title} 소개 영상`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </section>
+          )}
         </div>
       </article>
     </div>,
