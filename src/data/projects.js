@@ -8,8 +8,40 @@ const getPeriodDates = (period) => {
 
 const projectItems = [
   {
+    tone: 'blue',
+    title: 'Hyper-V 기반 사내 테스트 환경 IaC 구축',
+    description: '반복되는 WEB·WAS·DB 서버 VM 생성을 코드로 자동화한 사내 IaC 환경',
+    period: '2026.08 — 진행 중',
+    skills: ['Hyper-V', 'Terraform', 'Ansible', 'Packer', 'IaC', 'AI Agent'],
+    purpose: '사내에서 신규 프로젝트를 수행할 때마다 Hyper-V에 WEB·WAS·DB 서버 VM을 반복적으로 생성하던 작업을 IaC로 자동화하고, 서버 구성을 코드로 재사용·관리할 수 있는 환경을 구축하는 프로젝트입니다.',
+    role: [
+      '신규 프로젝트의 WEB·WAS·DB VM 구성 요건 분석',
+      'Packer 기반 VM Base Image 생성 자동화',
+      'Terraform 기반 프로젝트당 WEB·WAS·DB VM 3대 Provisioning 자동화',
+      'Ansible 기반 Server Configuration 자동화',
+      'AI Agent를 활용한 IaC Code 작성·검증',
+    ],
+    details: [
+      'Packer로 반복 사용할 Hyper-V VM Base Image 생성 과정을 자동화했습니다.',
+      'Terraform에 WEB·WAS·DB 역할별 VM 구성을 정의하고, 코드를 실행해 신규 프로젝트당 Hyper-V VM 3대를 생성하도록 구성했습니다.',
+      'Ansible로 각 서버 역할에 필요한 OS·Package·Service 설정을 자동화하고, 프로젝트별 요건에 맞게 코드를 수정·재사용할 수 있게 했습니다.',
+      'AI Agent를 활용해 Terraform·Ansible·Packer Code를 작성하고 검토·보완하며 IaC 도입 과정을 효율화했습니다.',
+    ],
+    troubleshooting: [
+      {
+        problem: '신규 프로젝트를 수행할 때마다 WEB·WAS·DB 서버용 Hyper-V VM을 수동으로 반복 생성·설정해야 했습니다.',
+        solution: 'Packer로 Base Image를 생성하고 Terraform으로 역할별 VM을 Provisioning하며, Ansible로 서버 설정을 적용하는 IaC 흐름을 구축했습니다.',
+        result: '신규 프로젝트당 WEB·WAS·DB VM 3대의 반복 생성·설정 작업을 코드 기반으로 전환해 동일한 테스트 환경을 재현하고 인프라 구성을 코드로 관리할 수 있게 했습니다.',
+      },
+    ],
+    github: '',
+    architecture: '',
+    architectureAlt: '',
+    images: [],
+  },
+  {
     tone: 'lime',
-    title: 'GitOps DevOps Environment',
+    title: 'GitOps 기반 DevOps 환경 구축',
     description: 'Kubernetes 기반 GitOps CI/CD 파이프라인 구축',
     period: '2026.06 — 2026.08',
     skills: ['GCP', 'Kubernetes', 'Jenkins', 'Nexus', 'Argo CD', 'Helm', 'Prometheus', 'Grafana'],
@@ -45,7 +77,7 @@ const projectItems = [
   },
   {
     tone: 'blue',
-    title: 'GIS & 3D Building Service',
+    title: 'GIS·3D 건물정보 서비스 유지보수',
     description: '온프레미스 MSA의 KT Cloud Kubernetes 이전과 GIS·3D 건물정보 서비스 유지보수',
     period: '2026.03 — 2026.05',
     skills: ['NestJS', 'VWorld API', 'Docker', 'Kubernetes', 'Helm', 'KT Cloud', 'Nginx'],
@@ -70,7 +102,7 @@ const projectItems = [
   },
   {
     tone: 'violet',
-    title: 'Public Data Open API',
+    title: '공공데이터 Open API 시스템',
     description: '공공데이터 수집·가공·개방을 위한 ETL과 API 운영 시스템',
     period: '2025.10 — 2026.05',
     skills: ['Spring Boot', 'Spring Batch', 'PostgreSQL', 'Docker', 'Rocky Linux', 'React', 'Nginx'],
@@ -101,7 +133,7 @@ const projectItems = [
   },
   {
     tone: 'orange',
-    title: '국립공원 데이터뱅크 하자보수',
+    title: '국립공원 데이터뱅크 플랫폼 하자보수',
     description: '대용량 공원 데이터의 정기 추출·다운로드 기능 개선과 저장공간 안정화',
     period: '2026.02 — 2026.08',
     skills: ['Spring', 'JSP', 'PostgreSQL', 'Spring Batch', 'NFS'],
@@ -136,7 +168,7 @@ const projectItems = [
   },
   {
     tone: 'cyan',
-    title: 'My Streaming Partner',
+    title: '나의 방송파트너',
     description: '3개 방송 플랫폼 채팅 통합과 AI 감정 분석 서비스',
     period: '2023.03 — 2024.06',
     skills: ['Spring Boot', 'Flask', 'Python', 'SSE', 'JWT', 'PostgreSQL', 'MongoDB Atlas', 'AWS EC2', 'GitHub Actions'],

@@ -2,14 +2,15 @@ import { skillGroups } from '../data/skills'
 import Icon from './Icon'
 import SkillBadge from './SkillBadge'
 
-const groupTones = ['lime', 'blue', 'violet', 'orange', 'cyan']
-const groupIcons = ['backend', 'database', 'devops', 'server', 'cloud']
+const groupTones = ['lime', 'blue', 'violet', 'cyan', 'orange', 'blue']
+const groupIcons = ['backend', 'database', 'devops', 'iac', 'server', 'cloud']
 const iconStyles = [
   'border-lime/30 bg-lime/10 text-lime',
   'border-sky-400/30 bg-sky-400/10 text-sky-300',
   'border-violet-400/30 bg-violet-400/10 text-violet-300',
-  'border-orange-400/30 bg-orange-400/10 text-orange-300',
   'border-cyan-400/30 bg-cyan-400/10 text-cyan-300',
+  'border-orange-400/30 bg-orange-400/10 text-orange-300',
+  'border-sky-400/30 bg-sky-400/10 text-sky-300',
 ]
 
 export default function Skills() {

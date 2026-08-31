@@ -26,7 +26,7 @@ export const miniProjects = [
   {
     icon: '📜',
     tone: 'blue',
-    title: 'Full-stack Board',
+    title: '풀스택 게시판',
     description: '인증부터 검색, 배포까지 백엔드 서비스의 전 과정을 적용한 게시판 웹 서비스',
     period: '2025.06.13 — 2025.08.04',
     skills: ['Spring Boot', 'JPA', 'React', 'MySQL', 'Redis', 'Jenkins', 'Docker', 'AWS EC2'],
@@ -54,7 +54,7 @@ export const miniProjects = [
   {
     icon: '🌙',
     tone: 'violet',
-    title: 'DLMO Prediction API',
+    title: 'DLMO 예측 API',
     description: '웹에서 동작하던 오픈소스 수면 시작 시간 예측 코드를 분석해 API로 재구성',
     period: '2024.07.01 — 2024.08.31',
     skills: ['Node.js', 'JavaScript', 'PostgreSQL', 'CSV', 'HTML', 'CSS'],
@@ -78,7 +78,7 @@ export const miniProjects = [
   {
     icon: '🚇',
     tone: 'orange',
-    title: 'Subway Route Finder',
+    title: '지하철 경로 탐색기',
     description: 'Dijkstra Algorithm으로 지하철 최단 경로와 도착 정보를 제공하는 Desktop Application',
     period: '2022.10.01 — 2022.12.20',
     skills: ['Java', 'JavaFX', 'Dijkstra', 'Crawling'],
