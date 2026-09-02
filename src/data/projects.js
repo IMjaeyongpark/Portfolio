@@ -1,7 +1,6 @@
 import gitopsArchitecture from '../assets/projects/gitops-architecture.png'
 import gitopsPipeline from '../assets/projects/gitops-pipeline.png'
 import streamingPartnerArchitecture from '../assets/projects/streaming-partner-architecture.png'
-import streamingPartnerAwards from '../assets/projects/streaming-partner-awards.png'
 
 const getPeriodDates = (period) => {
   const dates = period.match(/\d{4}\.\d{2}/g) ?? []
@@ -208,13 +207,7 @@ const projectItems = [
     },
     architecture: streamingPartnerArchitecture,
     architectureAlt: 'AWS 기반 나의 방송파트너 서비스 아키텍처',
-    images: [
-      {
-        src: streamingPartnerAwards,
-        alt: '나의 방송파트너 프로젝트 수상 내역',
-        caption: '교내외 공모전 수상 내역',
-      },
-    ],
+    images: [],
   },
 ]
 
