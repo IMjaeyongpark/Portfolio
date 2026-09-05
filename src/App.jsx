@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Intro from './components/Intro'
 import Skills from './components/Skills'
+import Career from './components/Career'
 import Projects from './components/Projects'
 import MiniProjects from './components/MiniProjects'
 import Footer from './components/Footer'
@@ -14,6 +15,7 @@ export default function App() {
         <Skills />
         <Projects />
         <MiniProjects />
+        <Career />
       </main>
       <Footer />
     </div>

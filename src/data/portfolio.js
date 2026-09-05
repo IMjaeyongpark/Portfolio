@@ -2,8 +2,8 @@ export const portfolio = {
   name: '박재용',
   brand: 'PORTFOLIO',
   role: 'Backend & DevOps Developer',
-  intro: '백엔드와 인프라를 연결해\n안정적인 서비스를 만듭니다',
-  supportingText: 'Spring Boot 기반 개발 경험을 바탕으로 Docker·Kubernetes 환경의 배포와 실서비스 운영 문제를 함께 해결하고 있습니다.',
+  intro: '개발과 운영을 연결해\n안정적인 배포 환경을 만듭니다',
+  supportingText: '배포와 인프라 운영을 자동화하는 DevOps 엔지니어입니다.',
   github: 'https://github.com/IMjaeyongpark',
   links: [
     { label: 'Tech Blog', url: 'https://undergrounddev.tistory.com/' },
@@ -15,4 +15,5 @@ export const navigation = [
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
   { label: 'Mini', href: '#mini-projects' },
+  { label: 'Career', href: '#career' },
 ]

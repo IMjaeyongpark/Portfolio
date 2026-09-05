@@ -40,7 +40,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`focus-ring rounded-lg px-1.5 py-2 text-[11px] font-semibold transition-colors sm:px-3 sm:text-sm ${isActive ? 'bg-blue-50 text-lime' : 'text-muted hover:bg-[#f2f4f6] hover:text-ink'}`}
+                className={`focus-ring rounded-lg px-1 py-2 text-[10px] font-semibold transition-colors sm:px-3 sm:text-sm ${isActive ? 'bg-blue-50 text-lime' : 'text-muted hover:bg-[#f2f4f6] hover:text-ink'}`}
               >
                 {item.label}
               </a>

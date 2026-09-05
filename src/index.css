@@ -24,7 +24,7 @@ button { font: inherit; }
 
 @layer components {
   .page-container { @apply mx-auto w-full max-w-5xl px-5 sm:px-6; }
-  .section-space { @apply py-20 sm:py-24; }
+  .section-space { @apply py-16 sm:py-20; }
   .eyebrow { @apply mb-3 flex items-center gap-2 text-sm font-semibold text-lime; }
   .section-title { @apply text-3xl font-bold tracking-[-0.035em] text-ink sm:text-4xl; }
   .section-copy { @apply mt-3 max-w-2xl text-sm leading-7 text-muted sm:text-base; }
@@ -38,3 +38,22 @@ button { font: inherit; }
 }
 
 .modal-enter { animation: modal-in .2s ease-out; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

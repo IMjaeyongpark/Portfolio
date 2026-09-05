@@ -14,7 +14,7 @@ const projectItems = [
     title: 'Hyper-V 기반 사내 테스트 환경 IaC 구축',
     description: 'Rocky Linux 기반 WEB·WAS·DB VM의 생성·설정·운영을 연결한 Hyper-V IaC 환경',
     period: '2026.08 — 진행 중',
-    skills: ['Hyper-V', 'Rocky Linux', 'Terraform', 'Ansible', 'Packer', 'PowerShell', 'Kickstart', 'IaC', 'AI Agent'],
+    skills: ['Hyper-V', 'Rocky Linux', 'Terraform', 'Ansible', 'Packer', 'PowerShell', 'IaC', 'AI Agent'],
     purpose: '사내 신규 프로젝트마다 Hyper-V에 WEB·WAS·DB VM을 반복적으로 생성·설정하던 작업을 자동화했습니다. servers.yml만 수정해 프로젝트별 서버 사양과 네트워크를 정의하고, 동일한 절차로 재생성·관리할 수 있는 IaC 환경을 구축했습니다.',
     role: [
       'Packer·Kickstart 기반 Rocky Linux 9.7 Base VHDX 생성 자동화',
