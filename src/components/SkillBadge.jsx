@@ -1,14 +1,14 @@
 const toneStyles = {
-  lime: 'border-lime/30 bg-lime/10 text-lime',
-  blue: 'border-sky-400/30 bg-sky-400/10 text-sky-300',
-  violet: 'border-violet-400/30 bg-violet-400/10 text-violet-300',
-  orange: 'border-orange-400/30 bg-orange-400/10 text-orange-300',
-  cyan: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-300',
-  neutral: 'border-line bg-white/[0.025] text-[#c8cbce]',
+  lime: 'border-blue-200 bg-blue-50 text-blue-700',
+  blue: 'border-sky-200 bg-sky-50 text-sky-700',
+  violet: 'border-violet-200 bg-violet-50 text-violet-700',
+  orange: 'border-orange-200 bg-orange-50 text-orange-700',
+  cyan: 'border-cyan-200 bg-cyan-50 text-cyan-700',
+  neutral: 'border-line bg-[#f4f5f7] text-[#4e5968]',
 }
 
 export default function SkillBadge({ children, accent = false, tone = 'neutral' }) {
   const colorStyle = accent ? toneStyles.lime : toneStyles[tone] || toneStyles.neutral
 
-  return <span className={`inline-flex items-center border px-3 py-1.5 text-xs font-semibold ${colorStyle}`}>{children}</span>
+  return <span className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold ${colorStyle}`}>{children}</span>
 }

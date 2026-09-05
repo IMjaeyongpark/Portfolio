@@ -7,16 +7,14 @@ export default function MiniProjects() {
   const [selectedProject, setSelectedProject] = useState(null)
 
   return (
-    <section id="mini-projects" className="section-space border-t border-white/6 bg-white/[0.012] scroll-mt-16">
+    <section id="mini-projects" className="section-space scroll-mt-16 bg-white">
       <div className="page-container">
-        <div className="mb-12 flex flex-col justify-between gap-5 sm:mb-16 sm:flex-row sm:items-end">
-          <div>
-            <p className="eyebrow">03 — Experiments</p>
-            <h2 className="section-title">Mini Projects</h2>
-          </div>
-          <p className="max-w-md text-sm leading-7 text-muted">새로운 기술과 문제 해결 방법을 작은 결과물로 검증한 개인 프로젝트입니다.</p>
+        <div className="mb-10 sm:mb-12">
+          <p className="eyebrow">Experiments</p>
+          <h2 className="section-title">Mini Projects</h2>
+          <p className="section-copy">새로운 기술과 문제 해결 방법을 작은 결과물로 검증한 개인 프로젝트입니다.</p>
         </div>
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {miniProjects.map((project, index) => (
             <ProjectCard
               key={project.title}

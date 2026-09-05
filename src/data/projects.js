@@ -1,4 +1,5 @@
 import gitopsArchitecture from '../assets/projects/gitops-architecture.png'
+import gisBuildingArchitecture from '../assets/projects/gis-3d-building-kt-cloud-architecture.png'
 import gitopsPipeline from '../assets/projects/gitops-pipeline.png'
 import streamingPartnerArchitecture from '../assets/projects/streaming-partner-architecture.png'
 
@@ -99,8 +100,8 @@ const projectItems = [
     ],
     troubleshooting: [],
     github: '',
-    architecture: '',
-    architectureAlt: '',
+    architecture: gisBuildingArchitecture,
+    architectureAlt: 'KT Cloud Kubernetes 기반 GIS·3D 건물정보 서비스 아키텍처',
     images: [],
   },
   {

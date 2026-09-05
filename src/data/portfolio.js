@@ -11,6 +11,7 @@ export const portfolio = {
 }
 
 export const navigation = [
+  { label: 'Home', href: '#top' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
   { label: 'Mini', href: '#mini-projects' },
