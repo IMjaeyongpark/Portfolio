@@ -9,8 +9,8 @@ export default function Intro() {
       <div className="absolute -right-40 -bottom-40 size-96 rounded-full bg-violet-500/15 blur-[120px]" />
       <div className="page-container relative flex min-h-[78vh] flex-col items-center justify-center pt-32 pb-20 text-center sm:pt-40 sm:pb-24">
         <Reveal><p className="text-xs font-semibold tracking-[0.18em] text-blue-400 uppercase sm:text-sm">{portfolio.role}</p></Reveal>
-        <Reveal delay={90}><h1 className="mt-6 text-5xl leading-none font-black tracking-[-0.06em] sm:text-7xl">{portfolio.name}</h1></Reveal>
-        <Reveal delay={180}><p className="mt-6 whitespace-pre-line text-xl leading-tight font-semibold tracking-[-0.03em] text-white/85 sm:text-3xl">{portfolio.intro}</p></Reveal>
+        <Reveal delay={90}><h1 className="mt-6 text-5xl leading-none font-black tracking-[0] sm:text-7xl">{portfolio.name}</h1></Reveal>
+        <Reveal delay={180}><p className="mt-6 whitespace-pre-line text-lg leading-[1.25] font-semibold tracking-[-0.015em] text-white/85 sm:text-2xl">{portfolio.intro}</p></Reveal>
         <Reveal delay={270}><p className="mt-5 max-w-xl text-sm leading-7 text-white/55 sm:text-base">{portfolio.supportingText}</p></Reveal>
         <Reveal delay={360}>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
