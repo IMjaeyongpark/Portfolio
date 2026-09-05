@@ -10,6 +10,7 @@ const getPeriodDates = (period) => {
 
 const projectItems = [
   {
+    slug: 'hyper-v-iac',
     tone: 'blue',
     title: 'Hyper-V 기반 사내 테스트 환경 IaC 구축',
     description: 'Rocky Linux 기반 WEB·WAS·DB VM의 생성·설정·운영을 연결한 Hyper-V IaC 환경',
@@ -44,6 +45,7 @@ const projectItems = [
     images: [],
   },
   {
+    slug: 'gitops-devops',
     tone: 'lime',
     title: 'GitOps 기반 DevOps 환경 구축',
     description: 'Kubernetes 기반 GitOps CI/CD 파이프라인 구축',
@@ -80,6 +82,7 @@ const projectItems = [
     ],
   },
   {
+    slug: 'gis-3d-building',
     tone: 'blue',
     title: 'GIS·3D 건물정보 서비스 유지보수',
     description: '온프레미스 MSA의 KT Cloud Kubernetes 이전과 GIS·3D 건물정보 서비스 유지보수',
@@ -105,6 +108,7 @@ const projectItems = [
     images: [],
   },
   {
+    slug: 'public-data-open-api',
     tone: 'violet',
     title: '공공데이터 Open API 시스템',
     description: '공공데이터 수집·가공·개방을 위한 ETL과 API 운영 시스템',
@@ -136,6 +140,7 @@ const projectItems = [
     images: [],
   },
   {
+    slug: 'national-park-databank',
     tone: 'orange',
     title: '국립공원 데이터뱅크 플랫폼 하자보수',
     description: '대용량 공원 데이터의 정기 추출·다운로드 기능 개선과 저장공간 안정화',
@@ -171,6 +176,7 @@ const projectItems = [
     images: [],
   },
   {
+    slug: 'streaming-partner',
     tone: 'cyan',
     title: '나의 방송파트너',
     description: '3개 방송 플랫폼 채팅 통합과 AI 감정 분석 서비스',

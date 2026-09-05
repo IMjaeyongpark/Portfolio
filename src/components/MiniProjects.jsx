@@ -1,12 +1,8 @@
-import { useState } from 'react'
 import { miniProjects } from '../data/miniProjects'
 import ProjectCard from './ProjectCard'
-import ProjectDetail from './ProjectDetail'
 import Reveal from './Reveal'
 
 export default function MiniProjects() {
-  const [selectedProject, setSelectedProject] = useState(null)
-
   return (
     <section id="mini-projects" className="section-space scroll-mt-16 bg-white">
       <div className="page-container">
@@ -22,13 +18,12 @@ export default function MiniProjects() {
                 project={project}
                 index={index}
                 label="MINI"
-                onOpen={() => setSelectedProject(project)}
+                basePath="mini-projects"
               />
             </Reveal>
           ))}
         </div>
       </div>
-      {selectedProject && <ProjectDetail project={selectedProject} onClose={() => setSelectedProject(null)} />}
     </section>
   )
 }

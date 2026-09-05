@@ -1,5 +1,6 @@
 export const miniProjects = [
   {
+    slug: 'career-coach-chatbot',
     icon: '🤖',
     tone: 'lime',
     title: '개인 맞춤형 커리어 코치 챗봇 API',
@@ -24,6 +25,7 @@ export const miniProjects = [
     links: [{ label: 'GitHub', url: 'https://github.com/IMjaeyongpark/AIChallenge' }],
   },
   {
+    slug: 'fullstack-board',
     icon: '📜',
     tone: 'blue',
     title: '풀스택 게시판',
@@ -52,6 +54,7 @@ export const miniProjects = [
     ],
   },
   {
+    slug: 'dlmo-api',
     icon: '🌙',
     tone: 'violet',
     title: 'DLMO 예측 API',
@@ -76,6 +79,7 @@ export const miniProjects = [
     links: [{ label: 'GitHub', url: 'https://github.com/IMjaeyongpark/nodelab' }],
   },
   {
+    slug: 'subway-route',
     icon: '🚇',
     tone: 'orange',
     title: '지하철 경로 탐색기',

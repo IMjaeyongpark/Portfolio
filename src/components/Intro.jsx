@@ -7,7 +7,7 @@ export default function Intro() {
     <section id="top" className="relative overflow-hidden bg-[#0d0f14] text-white">
       <div className="absolute -top-40 -left-40 size-96 rounded-full bg-blue-500/20 blur-[120px]" />
       <div className="absolute -right-40 -bottom-40 size-96 rounded-full bg-violet-500/15 blur-[120px]" />
-      <div className="page-container relative flex min-h-[78vh] flex-col items-center justify-center py-24 text-center sm:py-32">
+      <div className="page-container relative flex min-h-[78vh] flex-col items-center justify-center pt-32 pb-20 text-center sm:pt-40 sm:pb-24">
         <Reveal><p className="text-xs font-semibold tracking-[0.18em] text-blue-400 uppercase sm:text-sm">{portfolio.role}</p></Reveal>
         <Reveal delay={90}><h1 className="mt-6 text-5xl leading-none font-black tracking-[-0.06em] sm:text-7xl">{portfolio.name}</h1></Reveal>
         <Reveal delay={180}><p className="mt-6 whitespace-pre-line text-xl leading-tight font-semibold tracking-[-0.03em] text-white/85 sm:text-3xl">{portfolio.intro}</p></Reveal>
