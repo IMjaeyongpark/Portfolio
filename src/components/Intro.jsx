@@ -18,7 +18,7 @@ export default function Intro() {
             {portfolio.links.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="focus-ring group inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white/75 transition-colors hover:border-white/40 hover:text-white">{link.label}<Icon name="external" size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></a>)}
           </div>
         </Reveal>
-        <Reveal delay={450}><a href="#projects" className="focus-ring mt-14 inline-flex flex-col items-center gap-2 text-xs text-white/40 transition-colors hover:text-white/70"><span>역량 확인하기</span><span aria-hidden="true">↓</span></a></Reveal>
+        <Reveal delay={450}><a href="#projects" className="focus-ring mt-14 inline-flex flex-col items-center gap-2 text-xs text-white/40 transition-colors hover:text-white/70"><span>프로젝트 보기</span><span aria-hidden="true">↓</span></a></Reveal>
       </div>
     </section>
   )
