@@ -3,13 +3,40 @@ import { navigation, portfolio } from '../data/portfolio'
 
 export default function Header() {
   const isHomePage = window.location.pathname === '/'
-  const [activeHref, setActiveHref] = useState(isHomePage ? '#top' : null)
+  const initialHash = window.location.hash
+  const initialActiveHref = navigation.some((item) => item.href === initialHash) ? initialHash : '#top'
+  const [activeHref, setActiveHref] = useState(isHomePage ? initialActiveHref : null)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButton = useRef(null)
   const navigationRef = useRef(null)
   const scrollTargetRef = useRef(null)
   const scrollUnlockTimerRef = useRef(null)
   const [indicator, setIndicator] = useState(null)
+
+  useLayoutEffect(() => {
+    if (!isHomePage || !window.location.hash) return undefined
+
+    const hash = window.location.hash
+    const target = document.querySelector(hash)
+    if (!target) return undefined
+
+    let scrollFrame
+    const renderFrame = window.requestAnimationFrame(() => {
+      scrollFrame = window.requestAnimationFrame(() => {
+        if (hash === '#top') {
+          window.scrollTo({ top: 0, behavior: 'instant' })
+        } else {
+          target.scrollIntoView({ behavior: 'instant', block: 'start' })
+        }
+        setActiveHref(navigation.some((item) => item.href === hash) ? hash : '#projects')
+      })
+    })
+
+    return () => {
+      window.cancelAnimationFrame(renderFrame)
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame)
+    }
+  }, [isHomePage])
 
   const handleNavigation = (event, item) => {
     setMenuOpen(false)
