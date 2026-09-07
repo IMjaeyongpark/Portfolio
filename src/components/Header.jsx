@@ -147,7 +147,7 @@ export default function Header() {
                 href={isHomePage ? item.href : `/${item.href}`}
                 onClick={(event) => handleNavigation(event, item)}
                 aria-current={isActive ? 'page' : undefined}
-                className={`focus-ring relative z-10 rounded-xl px-4 py-3 text-sm font-semibold transition-colors duration-300 md:rounded-full md:px-3 md:py-2 ${isActive ? 'text-lime' : 'text-muted hover:text-ink'}`}
+                className={`focus-ring relative z-10 rounded-xl px-4 py-3 text-sm font-normal transition-colors duration-300 md:rounded-full md:px-3 md:py-2 ${isActive ? 'text-lime' : 'text-muted hover:text-ink'}`}
               >
                 {item.label}
               </a>
