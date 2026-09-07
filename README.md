@@ -102,6 +102,13 @@ import pipelineImage from '../assets/projects/pipeline.png'
   purpose: '프로젝트 목적',
   role: ['담당 역할'],
   details: ['주요 구현 내용'],
+  challenges: [
+    {
+      problem: '구축 과정에서 해결해야 할 요구사항',
+      solution: '과제를 해결하기 위한 접근 방법',
+      result: '구현 결과 또는 현재 검증 상태',
+    },
+  ],
   troubleshooting: [
     {
       problem: '발생한 문제',
@@ -110,6 +117,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
     },
   ],
   improvements: ['향후 확장 방향'],
+  achievements: ['프로젝트 성과'],
   links: [
     { label: 'Backend', url: 'https://github.com/user/backend' },
     { label: 'Frontend', url: 'https://github.com/user/frontend' },
@@ -137,8 +145,11 @@ import pipelineImage from '../assets/projects/pipeline.png'
 - `tone`: `lime`, `blue`, `violet`, `orange`, `cyan` 중 하나를 사용합니다.
 - `github`: 링크가 하나인 경우 저장소 URL을 문자열로 지정할 수 있습니다.
 - `links`: 링크가 여러 개인 경우 `{ label, url }` 객체를 배열로 추가합니다. 카드와 상세 페이지에 함께 표시됩니다.
-- `troubleshooting`: 내용이 없으면 `[]`로 두며 해당 영역이 자동으로 숨겨집니다.
+- `challenges`: 반복 작업 자동화나 설계 요구사항을 `{ problem, solution, result }` 형식으로 작성합니다. 상세 페이지의 ‘해결 과제’에 표시됩니다.
+- `troubleshooting`: 실제 발생한 오류·성능 저하·운영 문제와 해결 사례를 같은 형식으로 작성합니다. ‘트러블슈팅’에 표시됩니다.
+- 두 항목은 함께 사용할 수 있으며, 생략하거나 `[]`로 지정하면 해당 영역이 숨겨집니다. 표시되는 영역에 따라 번호가 자동으로 이어집니다.
 - `improvements`: 확장 방향이 없으면 생략하거나 `[]`로 지정합니다.
+- `achievements`: 논문·수상 등 구현 내용과 구분할 성과를 문자열 배열로 작성합니다. 생략하거나 `[]`로 지정하면 ‘성과’ 영역이 숨겨집니다.
 - `architecture`: 없으면 `''`로 지정합니다.
 - `images`: 없으면 `[]`로 지정합니다. 여러 장을 넣으면 반응형 갤러리로 표시됩니다.
 - `video`: YouTube 영상을 상세 페이지에서 바로 재생하려면 `youtubeId`와 `title`을 지정합니다. 영상이 없으면 생략합니다.

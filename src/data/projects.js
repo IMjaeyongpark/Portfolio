@@ -13,10 +13,10 @@ const projectItems = [
     slug: 'hyper-v-iac',
     tone: 'blue',
     title: 'Hyper-V 기반 사내 테스트 환경 IaC 구축',
-    description: 'Rocky Linux 기반 WEB·WAS·DB VM의 생성부터 설정·운영까지 자동화한 Hyper-V IaC 환경',
+    description: 'WEB·WAS·DB VM의 반복 생성·설정을 코드로 전환한 Hyper-V IaC 환경 — 시험 환경 검증 중',
     period: '2026.08 — 진행 중',
     skills: ['Hyper-V', 'Rocky Linux', 'Terraform', 'Ansible', 'Packer', 'PowerShell', 'IaC', 'AI Agent'],
-    purpose: '사내 신규 프로젝트마다 Hyper-V에 WEB·WAS·DB VM을 반복적으로 생성·설정하던 작업을 자동화했습니다. servers.yml만 수정해 프로젝트별 서버 사양과 네트워크를 정의하고, 동일한 절차로 재생성·관리할 수 있는 IaC 환경을 구축했습니다.',
+    purpose: '사내 신규 프로젝트마다 WEB·WAS·DB 서버용 Hyper-V VM을 수동으로 생성하고 설정해야 했습니다. 이 반복 작업을 코드로 관리하기 위해 Packer·Terraform·Ansible을 연결한 자동화 코드를 구현했습니다. 현재 시험 VM과 IP를 사용해 전체 실행 흐름을 검증하고 있습니다.',
     role: [
       'Packer·Kickstart 기반 Rocky Linux 9.7 Base VHDX 생성 자동화',
       'Terraform·servers.yml 기반 프로젝트별 WEB·WAS·DB VM 3대 프로비저닝',
@@ -25,18 +25,18 @@ const projectItems = [
       'AI Agent를 활용한 IaC 코드·스크립트·검증 로직 작성 및 보완',
     ],
     details: [
-      'Rocky Linux ISO와 Kickstart로 Generation 2·Secure Boot 기반 무인 설치를 구성하고, Packer로 복제 가능한 Base VHDX를 생성했습니다.',
-      'servers.yml을 단일 설정 지점으로 구성해 프로젝트별 VM 이름·CPU·메모리·디스크·IP를 선언하고, Terraform으로 VHDX 복제·확장과 VM 수명주기를 관리했습니다.',
-      '관리용 DHCP NIC와 사내망 고정 IP NIC를 분리하고, Ansible로 네트워크·Docker·LVM/XFS 확장·SSH 9822·firewalld·SELinux 설정과 Kubernetes 구성을 위한 swap 비활성화를 적용했습니다.',
-      'PowerShell 스크립트로 Packer 빌드, Terraform 적용, Hyper-V KVP 기반 관리 IP 탐색, Ansible 실행, VM 전원 관리와 Terraform 삭제를 하나의 워크플로로 연결했습니다.',
-      '프로젝트별 Terraform 상태 파일을 분리하고 VM 이름·고정 IP·상태 파일 경로의 중복과 서브넷·리소스 설정을 사전에 검증하도록 구성했습니다.',
-      'AI Agent로 자동화 코드·스크립트·문서의 초안을 작성하고, 실행 대상과 변경 내용을 직접 검토하며 안전장치와 검증 로직을 보완했습니다. 현재 시험 VM과 IP를 사용해 전체 워크플로를 검증 중입니다.',
+      'Packer·Kickstart로 Rocky Linux 무인 설치를 구성하고, Generation 2·Secure Boot 기반의 복제 가능한 VHDX 이미지를 생성했습니다.',
+      'servers.yml에 프로젝트별 VM 이름·사양·IP를 정의하고, Terraform으로 VHDX 복제·확장과 VM 생성·삭제를 관리했습니다.',
+      '관리용 DHCP NIC와 사내망 고정 IP NIC를 분리하고, Ansible로 네트워크·Docker·디스크 확장·보안 설정을 자동화했습니다.',
+      'PowerShell로 이미지 생성, VM 생성, Hyper-V KVP 기반 관리 IP 탐색과 Ansible 실행을 연결하고 전원 관리·리소스 삭제 기능을 구성했습니다.',
+      '프로젝트별 Terraform 상태 파일을 분리하고, VM 이름·IP·상태 파일 경로의 중복과 서브넷·리소스 설정을 사전에 검사하도록 구현했습니다.',
+      'AI Agent로 작성한 코드·스크립트 초안을 직접 검토하고, 실행 대상 확인과 설정 검증 로직을 보완했습니다.',
     ],
-    troubleshooting: [
+    challenges: [
       {
         problem: '신규 프로젝트를 수행할 때마다 WEB·WAS·DB 서버용 Hyper-V VM을 수동으로 반복 생성·설정해야 했습니다.',
         solution: 'Packer·Terraform·Ansible을 연결하고, 프로젝트별 서버 사양과 IP만 servers.yml에 선언하면 PowerShell 스크립트로 이미지 생성, VM 프로비저닝과 OS 설정을 수행할 수 있도록 구성했습니다.',
-        result: '프로젝트당 WEB·WAS·DB VM 3대의 반복 생성·설정 작업을 코드로 전환해 동일한 테스트 환경을 재현하고, 프로젝트별 상태와 인프라 설정을 분리해 관리할 수 있는 기반을 마련했습니다.',
+        result: '프로젝트별 WEB·WAS·DB VM 3대의 사양과 설정을 코드로 정의하고 Terraform 상태를 분리해 관리하도록 구현했습니다. 현재 시험 환경에서 재생성 과정과 전체 워크플로의 동작을 확인하고 있습니다.',
       },
     ],
     github: '',
@@ -67,7 +67,7 @@ const projectItems = [
       'Helm으로 프론트엔드·백엔드 복제본, Service, Ingress와 상태 확인 설정을 관리했습니다.',
       'Prometheus와 Grafana로 Kubernetes 클러스터와 애플리케이션 상태를 확인할 수 있게 구성했습니다.',
     ],
-    troubleshooting: [
+    challenges: [
       {
         problem: 'Jenkins에서 Nexus와 GitHub 저장소에 접근하기 위한 인증 정보를 안전하게 관리해야 했습니다.',
         solution: 'Nexus 계정은 Jenkins Credentials로 관리하고, GitHub 연결에는 빌드 시 발급되는 GitHub App Token을 사용했습니다.',
@@ -98,21 +98,21 @@ const projectItems = [
     slug: 'gis-3d-building',
     tone: 'blue',
     title: 'GIS·3D 건물정보 서비스 유지보수',
-    description: '온프레미스 MSA를 KT Cloud Kubernetes로 이전하고 배포 구조를 개선한 서비스',
+    description: 'Docker Compose 기반 온프레미스 MSA를 KT Cloud Kubernetes·Helm 배포 환경으로 이전',
     period: '2026.03 — 2026.05',
     skills: ['NestJS', 'VWorld API', 'Docker', 'Kubernetes', 'Helm', 'KT Cloud', 'Nginx'],
-    purpose: '온프레미스 서버에서 Docker Compose로 운영되던 MSA 기반 GIS·3D 건물정보 서비스를 KT Cloud Kubernetes 환경으로 이전하고 안정적인 배포·운영 구조를 마련했습니다.',
+    purpose: '온프레미스 서버에서 Docker Compose로 운영되던 GIS·3D 건물정보 서비스를 KT Cloud Kubernetes 환경으로 이전했습니다. 기존 MSA 구조와 배포 설정을 분석하고 Kubernetes 리소스와 Helm 차트로 전환하는 작업을 담당했으며, NestJS 백엔드 유지보수와 외부 공간정보 API 연동을 함께 수행했습니다.',
     role: [
-      'NestJS 백엔드 분석 및 유지보수',
-      'VWorld WFS 데이터 3종 프록시 연동',
-      '기존 Docker Compose 기반 MSA 구조 분석',
-      'KT Cloud Kubernetes·Helm 배포 환경 구성',
+      '온프레미스 Docker Compose 설정과 MSA 서비스 구조 분석',
+      '기존 배포 설정의 Kubernetes 리소스 전환',
+      '서비스별 Helm 차트 구성 및 KT Cloud Kubernetes 배포',
+      'NestJS 백엔드 유지보수 및 VWorld WFS 데이터 3종 프록시 연동',
     ],
     details: [
-      'VWorld API로 건축물대장 정보 관련 WFS 데이터 3종을 프록시 방식으로 연동했습니다.',
-      '온프레미스의 Docker Compose 설정과 MSA 서비스 구조를 분석해 Kubernetes 리소스로 전환했습니다.',
-      'Helm 차트로 서비스별 배포 설정을 관리하고 KT Cloud Kubernetes 환경에 MSA를 배포했습니다.',
-      'AI 개발 도구로 낯선 NestJS 코드베이스를 빠르게 파악하고 필요한 기능을 구현했습니다.',
+      '기존 Docker Compose 설정과 MSA 구조를 분석하고, 서비스 배포 설정을 Kubernetes 리소스로 전환했습니다.',
+      '서비스별 배포 설정을 Helm 차트로 구성하고 KT Cloud Kubernetes 환경에 MSA 서비스를 배포했습니다.',
+      'VWorld API의 건축물대장 정보 관련 WFS 데이터 3종을 백엔드에서 프록시 방식으로 연동했습니다.',
+      'AI 개발 도구로 기존 NestJS 코드 구조를 분석하고 유지보수에 필요한 기능을 구현했습니다.',
     ],
     troubleshooting: [],
     github: '',
@@ -138,8 +138,8 @@ const projectItems = [
       'Spring Batch로 대용량 데이터의 수집·정제·적재 작업을 정기적으로 실행하도록 구성했습니다.',
       'React로 API 데이터를 조회하고 관리할 수 있는 운영 화면을 개발했습니다.',
       '애플리케이션을 Docker 이미지로 구성해 온프레미스 Rocky Linux 서버에 배포하고 운영했습니다.',
-      'DMZ·내부망 분리 환경에서 Nginx 리버스 프록시로 트래픽을 중계하고, 네트워크·포트·방화벽 설정을 확인하며 연동 이슈에 대응했습니다.',
-      '개방된 API의 운영 이슈에 대응하고 기능을 개선하며 서비스 안정성을 유지했습니다.',
+      'DMZ·내부망 분리 환경에서 Nginx 리버스 프록시로 API 트래픽을 중계하고, 포트·방화벽 설정을 점검해 연동 문제에 대응했습니다.',
+      '주요 조회 조건에 맞춰 PostgreSQL 인덱스를 적용하고 대용량 테이블의 조회 성능을 개선했습니다.',
     ],
     troubleshooting: [
       {
@@ -168,9 +168,10 @@ const projectItems = [
       'NFS 기반 파일 저장 공간 확장 및 관리',
     ],
     details: [
-      'Spring Batch가 PostgreSQL 테이블의 데이터를 주기적으로 추출해 CSV 파일을 생성하도록 구성했습니다.',
-      'JSP 기반 웹 화면에서 사용자가 생성된 데이터 파일을 조회하고 다운로드할 수 있도록 기존 기능을 분석·개선했습니다.',
-      '파일 생성·조회 흐름과 관련 데이터베이스 테이블 구조를 파악해 대용량 파일 처리 방식을 개선했습니다.',
+      'Spring Batch로 PostgreSQL 데이터를 주기적으로 추출해 CSV 파일을 생성하도록 구성했습니다.',
+      '데이터를 50만 건 단위의 CSV 파일로 분할하고 하나의 ZIP 파일로 압축해 다운로드하도록 변경했습니다.',
+      'JSP 기반 웹 화면의 기존 파일 조회·다운로드 기능을 분석하고 개선했습니다.',
+      'NFS로 다른 서버의 저장 공간을 연결하고, 과거 파일을 압축해 별도 백업 디렉터리에서 관리했습니다.',
     ],
     troubleshooting: [
       {
@@ -207,9 +208,11 @@ const projectItems = [
       '유튜브·치지직·숲 채팅을 동시 처리하는 통합 API를 직접 설계·구현했습니다.',
       'SSE로 실시간 채팅과 AI 감정 분석 데이터를 클라이언트에 단방향으로 전송했습니다.',
       'MongoDB Atlas, PostgreSQL, AWS RDS를 활용해 데이터 성격에 맞는 저장 구조를 설계했습니다.',
+    ],
+    achievements: [
       '결과물을 바탕으로 논문 3편을 작성했고, 교내외 공모전에서 대상을 포함해 총 10회 수상했습니다.',
     ],
-    troubleshooting: [
+    challenges: [
       {
         problem: '서로 다른 방식으로 제공되는 3개 방송 플랫폼의 채팅을 하나의 화면에 실시간으로 전달해야 했습니다.',
         solution: '플랫폼별 채팅 수집 로직을 Flask API에서 통합하고, 공통 형식으로 변환한 데이터를 SSE로 클라이언트에 전송하도록 구성했습니다.',

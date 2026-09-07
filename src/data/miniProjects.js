@@ -41,7 +41,7 @@ export const miniProjects = [
     ],
     details: [
       'JWT 인증을 적용하고 게시글·댓글의 등록·조회·수정·삭제를 구현했습니다.',
-      'Redis를 적용하고 Elasticsearch 기반 고급 검색 기능을 추가했습니다.',
+      'Elasticsearch를 연동해 게시판의 고급 검색 기능을 구현했습니다.',
       'Jenkins·Docker·AWS EC2를 연동한 CI/CD 파이프라인을 구축했습니다.',
     ],
     troubleshooting: [],
@@ -68,8 +68,8 @@ export const miniProjects = [
       '사용자 ID·특정 기간 기준 예측 API 구현',
     ],
     details: [
-      '사용자 ID를 활용한 DLMO 값 예측 기능을 구현했습니다.',
-      '지정한 기간의 DLMO 값을 예측하는 API를 구현했습니다.',
+      '기존 오픈소스의 DLMO 예측 코드를 Node.js API로 재구성했습니다.',
+      '사용자 ID와 지정 기간을 기준으로 DLMO 값을 예측하는 기능을 구현했습니다.',
       'CSV 파일 기반 데이터 관리를 PostgreSQL 저장·조회 구조로 변경했습니다.',
     ],
     troubleshooting: [],
@@ -93,9 +93,9 @@ export const miniProjects = [
       'JavaFX 기반 애플리케이션 UI/UX 구현',
     ],
     details: [
-      '출발역과 도착역 사이의 최단 지하철 경로를 제공하도록 구현했습니다.',
-      '지하철 노선도와 출발역의 도착 정보를 JavaFX UI로 표시했습니다.',
-      '수집한 소요 시간 데이터를 그래프의 가중치로 사용했습니다.',
+      '역 간 소요 시간을 수집하고 그래프의 가중치로 사용했습니다.',
+      '다익스트라 알고리즘으로 출발역과 도착역 사이의 최단 경로를 탐색하도록 구현했습니다.',
+      'JavaFX로 지하철 노선도와 출발역의 도착 정보를 화면에 표시했습니다.',
     ],
     troubleshooting: [],
     architecture: '',
