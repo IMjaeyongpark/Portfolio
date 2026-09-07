@@ -1,8 +1,8 @@
 # Developer Portfolio
 
-**배포 사이트:** [portfolio-seven-weld-x1la11m2lm.vercel.app](https://portfolio-seven-weld-x1la11m2lm.vercel.app/)
+**배포 사이트:** [jaeyong-portfolio.vercel.app](https://jaeyong-portfolio.vercel.app/)
 
-백엔드 개발과 DevOps 경험을 중심으로 구성한 박재용의 개발자 포트폴리오입니다. 메인 화면은 원 페이지 형식이며, 각 프로젝트의 상세 내용은 별도 경로에서 확인할 수 있습니다. 모든 콘텐츠를 `src/data` 파일에서 관리하고, 별도 서버 없이 Vercel에 정적 사이트로 배포합니다.
+백엔드 개발과 DevOps 경험을 중심으로 구성한 박재용의 개발자 포트폴리오입니다. 메인 화면은 원 페이지 형식이며, 주요 프로젝트와 미니 프로젝트의 상세 내용은 별도 경로에서 확인할 수 있습니다. 콘텐츠는 `src/data` 파일에서 관리하고, 별도 서버 없이 Vercel에 정적 사이트로 배포합니다.
 
 ## 기술 스택
 
@@ -14,14 +14,15 @@
 
 ## 주요 기능
 
-- Intro, Skills, Projects, Mini Projects, AI 작업 환경, Career 순서의 원 페이지 구성
-- AI 작업 환경: Codex ECC 템플릿 소개, 구성 카드, 작업 규모별 실행 절차 선택
+- Intro, Skills, Projects, Mini Projects, AI Workspace, Career 순서의 원 페이지 구성
+- AI Workspace: Codex ECC 템플릿 소개, 구성 카드, 작업 규모별 실행 절차 선택
 - 밝은 배경의 반응형 디자인과 좌측 소개·우측 작업 분야로 구성한 Intro
 - 카테고리별 기술 아이콘과 색상 배지
 - Projects와 Mini Projects에 공통 카드·상세 페이지 적용
 - 아키텍처, 파이프라인, 스크린샷 갤러리 지원
 - GitHub, 프론트엔드, 백엔드, 블로그, Figma, 데모 등 복수 링크 지원
 - 스크롤 위치에 따라 현재 영역을 표시하는 고정 내비게이션
+- 프로젝트 상세 페이지에서 메뉴를 선택하면 홈의 해당 영역으로 이동하는 해시 내비게이션
 - 데이터 파일에 객체를 추가하면 카드가 자동 생성되는 구조
 
 ## 실행 방법
@@ -60,7 +61,7 @@ src/
 │   ├── Career.jsx
 │   ├── AIEnvironment.jsx
 │   ├── ProjectCard.jsx    # 공통 카드 템플릿
-│   ├── ProjectDetail.jsx  # 공통 상세 페이지
+│   ├── ProjectDetail.jsx  # 주요·미니 프로젝트 공통 상세 페이지
 │   ├── Reveal.jsx
 │   ├── Icon.jsx
 │   └── Footer.jsx
@@ -87,6 +88,8 @@ src/
 | 경력 | `src/data/career.js` |
 | AI 작업 환경·템플릿 GitHub·작업 절차 | `src/data/aiEnvironment.js` |
 | 아키텍처·파이프라인·스크린샷 | `src/assets/projects/` |
+
+상단 메뉴는 `Home · Skills · Projects · AI Workspace · Career`로 구성됩니다. `Projects` 메뉴는 주요 프로젝트와 미니 프로젝트를 함께 가리키며, 각 카드 전체를 선택하면 상세 페이지로 이동합니다.
 
 ## 프로젝트 추가
 
@@ -158,7 +161,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
 - `images`: 없으면 `[]`로 지정합니다. 여러 장을 넣으면 반응형 갤러리로 표시됩니다.
 - `video`: YouTube 영상을 상세 페이지에서 바로 재생하려면 `youtubeId`와 `title`을 지정합니다. 영상이 없으면 생략합니다.
 
-이미지는 외부 URL에 직접 연결하기보다 `src/assets/projects/`에 저장한 뒤 import하는 방식을 권장합니다.
+이미지는 외부 URL에 직접 연결하기보다 `src/assets/projects/`에 저장한 뒤 import하는 방식을 권장합니다. 현재 아키텍처·파이프라인 이미지도 해당 디렉터리에서 import합니다.
 
 ## Git 주의사항
 
