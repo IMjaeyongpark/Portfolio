@@ -22,7 +22,7 @@ export default function AIEnvironment() {
               <h3 className="mt-4 whitespace-pre-line text-2xl font-bold leading-snug text-ink sm:text-3xl">{data.headline}</h3>
               <p className="mt-5 text-sm leading-7 text-muted">{data.description}</p>
               <div className="mt-5 flex flex-wrap gap-2">{data.tags.map((tag) => <SkillBadge key={tag} tone="blue">{tag}</SkillBadge>)}</div>
-              <a href={data.github} target="_blank" rel="noreferrer" className="focus-ring mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-80">{data.linkLabel}<Icon name="external" size={15} /></a>
+              <a href={data.github} target="_blank" rel="noreferrer" className="focus-ring mt-7 inline-flex items-center gap-2 py-2 text-xs font-semibold text-muted transition-colors hover:text-ink">{data.linkLabel}<Icon name="external" size={13} /></a>
             </div>
             <div className="rounded-2xl border border-line bg-white/90 p-5 sm:p-6">
               <h4 className="mb-5 text-sm font-semibold text-ink">{data.flowTitle}</h4>

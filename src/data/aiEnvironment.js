@@ -5,7 +5,7 @@ export const aiEnvironment = {
   description: 'ECC의 규칙·스킬을 필요한 작업에서 참조하도록 구성한 Codex CLI용 개인 하네스 엔지니어링 템플릿입니다. 프로젝트 지침, 읽기 전용 에이전트와 MCP 설정을 정리하고, 작업 규모에 따라 구현·검증 절차를 선택하도록 구성했습니다.',
   name: 'Codex ECC Template',
   github: 'https://github.com/IMjaeyongpark/codex-ecc-template',
-  linkLabel: 'GitHub에서 템플릿 보기',
+  linkLabel: 'GitHub',
   tags: ['Codex CLI', 'ECC', 'Skills', 'MCP'],
   flowTitle: '템플릿의 작업 흐름',
   flow: [
