@@ -16,7 +16,7 @@
 
 - Intro, Skills, Projects, Mini Projects, AI 작업 환경, Career 순서의 원 페이지 구성
 - AI 작업 환경: Codex ECC 템플릿 소개, 구성 카드, 작업 규모별 실행 절차 선택
-- 밝은 배경과 어두운 Intro 영역을 조합한 반응형 디자인
+- 밝은 배경의 반응형 디자인과 좌측 소개·우측 작업 분야로 구성한 Intro
 - 카테고리별 기술 아이콘과 색상 배지
 - Projects와 Mini Projects에 공통 카드·상세 페이지 적용
 - 아키텍처, 파이프라인, 스크린샷 갤러리 지원
