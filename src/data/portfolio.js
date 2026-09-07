@@ -13,7 +13,7 @@ export const portfolio = {
 export const navigation = [
   { label: 'Home', href: '#top' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Mini', href: '#mini-projects' },
+  { label: 'Projects', href: '#projects', paths: ['/projects/', '/mini-projects/'] },
+  { label: 'AI Workspace', href: '#ai-environment' },
   { label: 'Career', href: '#career' },
 ]

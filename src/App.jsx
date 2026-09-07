@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Intro from './components/Intro'
 import Skills from './components/Skills'
+import AIEnvironment from './components/AIEnvironment'
 import Career from './components/Career'
 import Projects from './components/Projects'
 import MiniProjects from './components/MiniProjects'
@@ -34,7 +35,7 @@ export default function App() {
           </div>
         </main>
       ) : (
-        <main><Intro /><Skills /><Projects /><MiniProjects /><Career /></main>
+        <main><Intro /><Skills /><Projects /><MiniProjects /><AIEnvironment /><Career /></main>
       )}
       <Footer />
     </div>

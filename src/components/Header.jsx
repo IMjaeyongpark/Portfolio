@@ -104,15 +104,15 @@ export default function Header() {
         <a href={isHomePage ? '#top' : '/#top'} className="focus-ring text-sm font-black tracking-[0.04em] text-ink sm:text-base">
           {portfolio.brand}<span className="text-lime">.</span>
         </a>
-        <button ref={menuButton} type="button" aria-expanded={menuOpen} aria-controls="main-navigation" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} onClick={() => setMenuOpen(!menuOpen)} className="focus-ring flex size-11 items-center justify-center rounded-xl border border-line bg-white text-ink sm:hidden">
+        <button ref={menuButton} type="button" aria-expanded={menuOpen} aria-controls="main-navigation" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} onClick={() => setMenuOpen(!menuOpen)} className="focus-ring flex size-11 items-center justify-center rounded-xl border border-line bg-white text-ink md:hidden">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
             {menuOpen ? <path d="m6 6 12 12M6 18 18 6" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
           </svg>
         </button>
-        <nav ref={navigationRef} id="main-navigation" aria-label="주요 메뉴" className={`${menuOpen ? 'flex' : 'hidden'} absolute inset-x-0 top-16 flex-col gap-1 border-b border-line bg-white p-4 shadow-lg sm:relative sm:inset-auto sm:flex sm:flex-row sm:items-center sm:rounded-full sm:border sm:bg-slate-50/70 sm:p-1 sm:shadow-none`}>
-          {indicator && <span aria-hidden="true" className="nav-indicator pointer-events-none absolute left-0 top-0 rounded-xl bg-white shadow-sm ring-1 ring-blue-100 sm:rounded-full" style={{ width: indicator.width, height: indicator.height, transform: `translate(${indicator.left}px, ${indicator.top}px)` }} />}
+        <nav ref={navigationRef} id="main-navigation" aria-label="주요 메뉴" className={`${menuOpen ? 'flex' : 'hidden'} absolute inset-x-0 top-16 flex-col gap-1 border-b border-line bg-white p-4 shadow-lg md:relative md:inset-auto md:flex md:flex-row md:items-center md:rounded-full md:border md:bg-slate-50/70 md:p-1 md:shadow-none`}>
+          {indicator && <span aria-hidden="true" className="nav-indicator pointer-events-none absolute left-0 top-0 rounded-xl bg-white shadow-sm ring-1 ring-blue-100 md:rounded-full" style={{ width: indicator.width, height: indicator.height, transform: `translate(${indicator.left}px, ${indicator.top}px)` }} />}
           {navigation.map((item) => {
-            const isActive = activeHref === item.href || (!isHomePage && window.location.pathname.startsWith(`/${item.href.slice(1)}/`))
+            const isActive = activeHref === item.href || (!isHomePage && (item.paths ?? [`/${item.href.slice(1)}/`]).some((path) => window.location.pathname.startsWith(path)))
 
             return (
               <a
@@ -120,7 +120,7 @@ export default function Header() {
                 href={isHomePage ? item.href : `/${item.href}`}
                 onClick={(event) => handleNavigation(event, item)}
                 aria-current={isActive ? 'page' : undefined}
-                className={`focus-ring relative z-10 rounded-xl px-4 py-3 text-sm font-semibold transition-colors duration-300 sm:rounded-full sm:px-3 sm:py-2 ${isActive ? 'text-lime' : 'text-muted hover:text-ink'}`}
+                className={`focus-ring relative z-10 rounded-xl px-4 py-3 text-sm font-semibold transition-colors duration-300 md:rounded-full md:px-3 md:py-2 ${isActive ? 'text-lime' : 'text-muted hover:text-ink'}`}
               >
                 {item.label}
               </a>

@@ -1,0 +1,31 @@
+export const aiEnvironment = {
+  eyebrow: 'AI Work Environment',
+  title: 'AI 작업 환경',
+  headline: '작업 규칙부터 검증까지,\n재사용하는 AI 개발 환경',
+  description: 'ECC의 규칙·스킬을 필요한 작업에서 참조하도록 구성한 Codex CLI용 개인 하네스 엔지니어링 템플릿입니다. 프로젝트 지침, 읽기 전용 에이전트와 MCP 설정을 정리하고, 작업 규모에 따라 구현·검증 절차를 선택하도록 구성했습니다.',
+  name: 'Codex ECC Template',
+  github: 'https://github.com/IMjaeyongpark/codex-ecc-template',
+  linkLabel: 'GitHub에서 템플릿 보기',
+  tags: ['Codex CLI', 'ECC', 'Skills', 'MCP'],
+  flowTitle: '템플릿의 작업 흐름',
+  flow: [
+    { title: '요청과 맥락 확인', description: '프로젝트 지침과 공통·언어별 규칙을 확인합니다.' },
+    { title: '변경 계획과 승인', description: '첫 수정 전에 변경 범위·이유·검증 방법을 제시하고, 승인된 범위에서 진행하도록 지시합니다.' },
+    { title: '필요한 도구로 구현', description: '메인 에이전트가 구현하고, 필요할 때 탐색·리뷰·문서 조사 에이전트의 도움을 받도록 구성합니다.' },
+    { title: '범위에 맞는 검증', description: '변경 규모에 맞춰 검사·테스트·리뷰를 수행합니다.' },
+  ],
+  structureTitle: '프로젝트에 맞게 조합하는 구성',
+  structure: [
+    { title: '작업 지침과 규칙', icon: 'backend', path: 'AGENTS.md · rules/', description: '공통·언어별 규칙과 작업 규모별 절차를 분리했습니다. 지침이 충돌하면 루트 AGENTS.md의 작업 규모 기준을 우선하도록 정리했습니다.' },
+    { title: '스킬과 읽기 전용 에이전트', icon: 'iac', path: '.agents/skills/ · .codex/agents/', description: '필요한 스킬만 참조하고, 코드 탐색·리뷰·공식 문서 조사 역할을 읽기 전용으로 설정해 구현 작업을 보조하도록 구성했습니다.' },
+    { title: '도구와 실행 설정', icon: 'devops', path: '.codex/config.toml · MCP', description: 'GitHub·Context7·Exa·Playwright의 실행 설정과 Windows·macOS/Linux용 환경 변수 로더를 마련했습니다. 인증과 실제 연결 여부는 실행 환경에서 확인합니다.' },
+    { title: '템플릿 구성 검증', icon: 'backend', path: 'scripts/validate_template.py', description: 'TOML·JSON 문법, 역할·플러그인 경로, OS별 설정과 MCP 명령의 일치 여부를 검사합니다. 누락된 경로와 설정 불일치 등을 확인하는 회귀 테스트도 포함했습니다.' },
+  ],
+  workflowTitle: '작업 규모에 따라 달라지는 절차',
+  workflowDescription: '템플릿에 정의한 실행 원칙입니다. 필요한 절차와 검증 범위를 작업에 맞춰 선택합니다.',
+  workflows: [
+    { id: 'small', label: '소형 작업', description: '변경 대상 파일을 확인하고 작은 수정을 직접 처리합니다.', steps: ['대상 확인', '수정', '관련 검사·테스트'], note: '승인된 범위에서 진행하며, 별도 에이전트나 전체 테스트는 더 큰 위험이 드러날 때만 사용하도록 지시합니다.' },
+    { id: 'medium', label: '중형 작업', description: '짧은 계획을 세운 뒤 변경 동작에 맞는 테스트와 자체 리뷰를 진행합니다.', steps: ['짧은 계획', '구현', '관련 테스트', '자체 리뷰', '최종 빌드'], note: '독립적인 조사나 리뷰가 도움이 될 때 전문 에이전트를 최대 1개 사용하도록 지시합니다.' },
+    { id: 'large', label: '대형·고위험 작업', description: '설계와 전문 리뷰를 포함하고, 새 기능이나 결함 수정에는 TDD를 적용하도록 지시합니다.', steps: ['설계', '구현·필요 시 TDD', '전문 리뷰', '통합 테스트·빌드', '필요 시 E2E·API 검증'], note: '병렬 에이전트 수와 생성 깊이를 템플릿 설정으로 제한하고, 스킬과 MCP는 필요한 작업에서 선택적으로 사용합니다.' },
+  ],
+}

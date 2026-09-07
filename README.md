@@ -14,7 +14,8 @@
 
 ## 주요 기능
 
-- Intro, Skills, Projects, Mini Projects, Career 순서의 원 페이지 구성
+- Intro, Skills, Projects, Mini Projects, AI 작업 환경, Career 순서의 원 페이지 구성
+- AI 작업 환경: Codex ECC 템플릿 소개, 구성 카드, 작업 규모별 실행 절차 선택
 - 밝은 배경과 어두운 Intro 영역을 조합한 반응형 디자인
 - 카테고리별 기술 아이콘과 색상 배지
 - Projects와 Mini Projects에 공통 카드·상세 페이지 적용
@@ -57,6 +58,7 @@ src/
 │   ├── Projects.jsx
 │   ├── MiniProjects.jsx
 │   ├── Career.jsx
+│   ├── AIEnvironment.jsx
 │   ├── ProjectCard.jsx    # 공통 카드 템플릿
 │   ├── ProjectDetail.jsx  # 공통 상세 페이지
 │   ├── Reveal.jsx
@@ -67,6 +69,7 @@ src/
 │   ├── skills.js          # 기술 카테고리와 기술 목록
 │   ├── projects.js        # 주요 프로젝트
 │   ├── miniProjects.js    # 미니 프로젝트
+│   ├── aiEnvironment.js   # AI 작업 환경 소개·구성·실행 절차
 │   └── career.js          # 경력
 ├── App.jsx
 ├── index.css
@@ -82,6 +85,7 @@ src/
 | 주요 프로젝트 | `src/data/projects.js` |
 | 미니 프로젝트 | `src/data/miniProjects.js` |
 | 경력 | `src/data/career.js` |
+| AI 작업 환경·템플릿 GitHub·작업 절차 | `src/data/aiEnvironment.js` |
 | 아키텍처·파이프라인·스크린샷 | `src/assets/projects/` |
 
 ## 프로젝트 추가
