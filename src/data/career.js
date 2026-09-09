@@ -7,8 +7,8 @@ export const careerItems = [
     experiences: [
       {
         title: 'Hyper-V 기반 사내 테스트 환경 IaC 구축',
-        period: '2026.08 — 진행 중',
-        description: 'Terraform·Ansible·Packer로 WEB·WAS·DB VM 생성·설정 자동화 코드를 구현하고, 시험 환경에서 전체 실행 흐름을 검증하고 있습니다.',
+        period: '2026.08 — 2026.09',
+        description: 'Rocky Linux 기본 이미지와 Terraform·Ansible·PowerShell을 연결해 VM 생성을 자동화하고, 현재 사내 테스트 서버에 도입해 사용 테스트 중입니다.',
       },
       {
         title: '국립공원 데이터뱅크 플랫폼 하자보수',
