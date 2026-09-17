@@ -37,7 +37,7 @@ const projectItems = [
         result: 'VM 설정을 코드로 재사용할 수 있게 했으며, 현재 사내 테스트 서버에서 생성·설정·삭제 흐름을 사용 테스트 중입니다.',
       },
     ],
-    github: '',
+    github: 'https://github.com/IMjaeyongpark/rocky-hyperv-template',
     architecture: '',
     architectureAlt: '',
     images: [],
