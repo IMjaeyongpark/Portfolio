@@ -2,6 +2,7 @@ import gitopsArchitecture from '../assets/projects/gitops-architecture.png'
 import gisBuildingArchitecture from '../assets/projects/gis-3d-building-kt-cloud-architecture.png'
 import gitopsPipeline from '../assets/projects/gitops-pipeline.png'
 import streamingPartnerArchitecture from '../assets/projects/streaming-partner-architecture.png'
+import hypervIacArchitecture from '../assets/projects/hyperv-iac-architecture.png'
 
 const getPeriodDates = (period) => {
   const dates = period.match(/\d{4}\.\d{2}/g) ?? []
@@ -38,8 +39,8 @@ const projectItems = [
       },
     ],
     github: 'https://github.com/IMjaeyongpark/rocky-hyperv-template',
-    architecture: '',
-    architectureAlt: '',
+    architecture: hypervIacArchitecture,
+    architectureAlt: 'Packer로 Rocky Linux 기본 이미지를 만들고 Terraform과 Ansible로 Hyper-V 가상 머신을 구성하는 IaC 흐름',
     images: [],
   },
   {
