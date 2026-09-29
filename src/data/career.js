@@ -13,17 +13,17 @@ export const careerItems = [
       {
         title: '국립공원 데이터뱅크 플랫폼 하자보수',
         period: '2026.02 — 2026.08',
-        description: 'CSV를 50만 건 단위로 분할해 ZIP으로 제공하고, NFS 연결과 과거 파일 정리로 저장 공간 부족에 대응했습니다.',
+        description: '파일 생성·조회 흐름을 분석하고, NFS 연결과 과거 파일 압축·분리 후 기존 조회 기능을 확인했습니다. 해당 저장 디렉터리 사용률은 약 98%에서 20%로 낮췄습니다.',
       },
       {
         title: 'GIS·3D 건물정보 서비스 유지보수',
         period: '2026.03 — 2026.05',
-        description: '온프레미스 MSA의 Docker Compose 설정을 Kubernetes 리소스와 Helm 차트로 전환하고 KT Cloud Kubernetes에 배포했습니다.',
+        description: '온프레미스 MSA의 클라우드 이전 업무에서 Docker Compose 설정 분석, Kubernetes 리소스·Helm 차트 작성과 KT Cloud 배포를 담당했습니다.',
       },
       {
         title: '공공데이터 Open API 배포·운영 및 성능 개선',
         period: '2025.10 — 2026.05',
-        description: '온프레미스 Docker 배포와 Nginx API 중계를 운영하고, PostgreSQL 인덱스 적용으로 1분 이상 걸리던 조회를 3초 이하로 줄였습니다.',
+        description: '온프레미스 배포와 API 중계를 담당하고, PostgreSQL 인덱스 적용으로 504 타임아웃이 발생하던 특정 조회를 1분 이상에서 3초 이하로 줄였습니다.',
       },
     ],
   },

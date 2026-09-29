@@ -14,11 +14,14 @@
 
 ## 주요 기능
 
-- Intro, Skills, Projects, Mini Projects, AI Workspace, Career 순서의 원 페이지 구성
+- Intro, Skills, Projects, Mini Projects, Career, AI Workspace 순서의 원 페이지 구성
 - AI Workspace: Codex ECC 템플릿 소개, 구성 카드, 작업 규모별 실행 절차 선택
 - 밝은 배경의 반응형 디자인과 좌측 소개·우측 작업 분야로 구성한 Intro
 - 카테고리별 기술 아이콘과 색상 배지
 - Projects와 Mini Projects에 공통 카드·상세 페이지 적용
+- 카드에 경험 구분(실무·사내 테스트·개인 프로젝트·대학 프로젝트), 결과와 진행 상태 표시
+- 주요 프로젝트는 Kubernetes 이전 → Hyper-V IaC → 개인 GitOps → 실무 운영 개선 → 대학 프로젝트 순서로 노출
+- 상세 페이지에 구현 흐름과 공개 코드·설정 자료 링크 표시
 - 아키텍처, 파이프라인, 스크린샷 갤러리 지원
 - GitHub, 프론트엔드, 백엔드, 블로그, Figma, 데모 등 복수 링크 지원
 - 스크롤 위치에 따라 현재 영역을 표시하는 고정 내비게이션
@@ -89,7 +92,7 @@ src/
 | AI 작업 환경·템플릿 GitHub·작업 절차 | `src/data/aiEnvironment.js` |
 | 아키텍처·파이프라인·스크린샷 | `src/assets/projects/` |
 
-상단 메뉴는 `Home · Skills · Projects · AI Workspace · Career`로 구성됩니다. `Projects` 메뉴는 주요 프로젝트와 미니 프로젝트를 함께 가리키며, 각 카드 전체를 선택하면 상세 페이지로 이동합니다.
+상단 메뉴는 `Home · Skills · Projects · Career · AI Workspace`로 구성됩니다. `Projects` 메뉴는 주요 프로젝트와 미니 프로젝트를 함께 가리키며, 각 카드 전체를 선택하면 상세 페이지로 이동합니다.
 
 ## 프로젝트 추가
 
@@ -101,6 +104,10 @@ import pipelineImage from '../assets/projects/pipeline.png'
 
 {
   slug: 'project-name',
+  priority: 7,
+  experience: '개인 프로젝트',
+  status: '개인 환경 구축',
+  outcome: '구현 결과 또는 현재 사용 테스트 상태',
   tone: 'lime',
   title: 'Project Name',
   description: '한 줄 설명',
@@ -109,6 +116,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
   purpose: '프로젝트 목적',
   role: ['담당 역할'],
   details: ['주요 구현 내용'],
+  workflow: ['입력', '처리', '결과'],
   challenges: [
     {
       problem: '구축 과정에서 해결해야 할 요구사항',
@@ -124,6 +132,10 @@ import pipelineImage from '../assets/projects/pipeline.png'
     },
   ],
   improvements: ['향후 확장 방향'],
+  evidenceNote: '공개 자료로 확인할 수 있는 범위와 실제 실행 결과의 구분',
+  evidence: [
+    { label: '배포 설정', url: 'https://github.com/user/backend/blob/main/Jenkinsfile', description: '자료에서 확인할 수 있는 구현 내용' },
+  ],
   achievements: ['프로젝트 성과'],
   links: [
     { label: 'Backend', url: 'https://github.com/user/backend' },
@@ -149,6 +161,10 @@ import pipelineImage from '../assets/projects/pipeline.png'
 ### 필수 값과 선택 값
 
 - `slug`: 상세 페이지 주소에 사용하는 고유한 영문 식별자입니다.
+- `priority`: 주요 프로젝트의 노출 우선순위입니다. 작은 수가 먼저 표시됩니다. 생략한 프로젝트는 우선순위가 지정된 프로젝트 뒤에 표시되며, 같은 우선순위에서는 기간순으로 정렬합니다. 미니 프로젝트는 배열 순서를 사용합니다.
+- `experience`: 실무·사내 테스트·개인 프로젝트·대학 프로젝트 등 경험의 성격입니다. 카드와 상세 페이지에 표시합니다.
+- `status`, `outcome`: 담당 범위·진행 상태와 결과 요약입니다. 수치가 있다면 해당 조회·디렉터리 등 측정 대상을 함께 적습니다. 생략하면 해당 영역이 숨겨집니다.
+- `workflow`: 주요 구현 앞에 순서대로 표시할 짧은 단계 이름입니다. 생략하면 기존 구현 목록만 표시합니다.
 - `tone`: `lime`, `blue`, `violet`, `orange`, `cyan` 중 하나를 사용합니다.
 - `github`: 링크가 하나인 경우 저장소 URL을 문자열로 지정할 수 있습니다.
 - `links`: 링크가 여러 개인 경우 `{ label, url }` 객체를 배열로 추가합니다. 카드와 상세 페이지에 함께 표시됩니다.
@@ -156,6 +172,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
 - `troubleshooting`: 실제 발생한 오류·성능 저하·운영 문제와 해결 사례를 같은 형식으로 작성합니다. ‘트러블슈팅’에 표시됩니다.
 - 두 항목은 함께 사용할 수 있으며, 생략하거나 `[]`로 지정하면 해당 영역이 숨겨집니다. 표시되는 영역에 따라 번호가 자동으로 이어집니다.
 - `improvements`: 확장 방향이 없으면 생략하거나 `[]`로 지정합니다.
+- `evidenceNote`, `evidence`: ‘코드·설정 자료’에 표시할 설명과 `{ label, url, description }` 링크 목록입니다. 공개 코드·설정·README와 실제 테스트 결과의 범위를 구분합니다. 회사의 비공개 주소·설정·로그는 추가하지 않습니다.
 - `achievements`: 논문·수상 등 구현 내용과 구분할 성과를 문자열 배열로 작성합니다. 생략하거나 `[]`로 지정하면 ‘성과’ 영역이 숨겨집니다.
 - `architecture`: 없으면 `''`로 지정합니다.
 - `images`: 없으면 `[]`로 지정합니다. 여러 장을 넣으면 반응형 갤러리로 표시됩니다.

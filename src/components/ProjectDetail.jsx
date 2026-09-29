@@ -7,8 +7,8 @@ function DetailSection({ number, title, children }) {
   return (
     <Reveal>
       <section className="grid gap-4 border-t border-line py-8 sm:grid-cols-[9rem_1fr]">
-        <div><span className="mr-2 text-[10px] font-bold text-lime">{number}</span><h3 className="inline text-sm font-semibold text-ink">{title}</h3></div>
-        <div className="text-sm leading-7 text-[#4e5968]">{children}</div>
+        <div><span className="mr-2 text-[10px] font-bold text-lime">{number}</span><h2 className="inline text-sm font-semibold text-ink">{title}</h2></div>
+        <div className="min-w-0 break-keep text-sm leading-7 text-[#4e5968] [overflow-wrap:anywhere]">{children}</div>
       </section>
     </Reveal>
   )
@@ -22,7 +22,7 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
   ].filter((section) => section.items?.length > 0)
   const summarySections = [
     { key: 'achievements', title: '성과', items: project.achievements },
-    { key: 'improvements', title: '확장 방향', items: project.improvements },
+    { key: 'improvements', title: '향후 개선', items: project.improvements },
   ].filter((section) => section.items?.length > 0)
 
   useEffect(() => {
@@ -36,12 +36,17 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
     <main className="min-h-[calc(100vh-4rem)] bg-[#f7f8fa]">
       <article aria-labelledby="project-detail-title">
         <header className="border-b border-line bg-white">
-          <div className="page-container py-12 sm:py-16">
+          <div className="page-container break-keep py-12 [overflow-wrap:anywhere] sm:py-16">
             <Reveal><a href={backHref} className="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-lime"><Icon name="arrow" size={16} className="rotate-180" /> 프로젝트 목록</a></Reveal>
             <Reveal delay={80}>
-              <p className="mt-10 text-xs font-semibold text-lime">{project.period}</p>
+              <div className="mt-10 flex flex-wrap items-center gap-3 text-xs">
+                {project.experience && <span className="rounded-full border border-line bg-[#f7f8fa] px-3 py-1 font-semibold text-ink">{project.experience}</span>}
+                <p className="font-semibold text-lime">{project.period}</p>
+              </div>
               <h1 id="project-detail-title" className="mt-4 max-w-4xl text-4xl font-bold tracking-[-0.05em] text-ink sm:text-6xl">{project.title}</h1>
+              {project.status && <p className="mt-4 text-sm leading-6 font-medium text-muted">{project.status}</p>}
               <p className="mt-5 max-w-2xl text-sm leading-7 text-muted sm:text-lg">{project.description}</p>
+              {project.outcome && <p className="mt-5 max-w-2xl rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm leading-6 font-medium text-ink"><span className="mb-1 block text-[10px] font-semibold text-blue-700">결과·진행 상태</span>{project.outcome}</p>}
             </Reveal>
             <Reveal delay={160}><div className="mt-7 flex flex-wrap gap-2">{project.skills.map((skill) => <SkillBadge key={skill} tone={project.tone}>{skill}</SkillBadge>)}</div></Reveal>
           </div>
@@ -64,7 +69,19 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
           <div className="rounded-2xl border border-line bg-white px-5 shadow-[0_18px_50px_rgba(15,23,42,0.04)] sm:px-8">
             <DetailSection number="01" title="프로젝트 목적"><p>{project.purpose}</p></DetailSection>
             <DetailSection number="02" title="담당 역할"><ul className="space-y-2">{project.role.map((item) => <li key={item} className="flex gap-3"><span className="mt-3 size-1 shrink-0 rounded-full bg-lime" />{item}</li>)}</ul></DetailSection>
-            <DetailSection number="03" title="주요 구현"><ul className="space-y-3">{project.details.map((item) => <li key={item} className="flex gap-3"><span className="mt-2.5 text-[10px] text-lime">—</span>{item}</li>)}</ul></DetailSection>
+            <DetailSection number="03" title="주요 구현">
+              {project.workflow?.length > 0 && (
+                <ol aria-label="구현 흐름" className="mb-6 flex flex-wrap items-center gap-2">
+                  {project.workflow.map((step, index) => (
+                    <li key={step} className="flex max-w-full items-center gap-2">
+                      <span className="rounded-lg border border-line bg-[#f7f8fa] px-3 py-2 text-xs leading-5"><span className="mr-2 font-semibold text-blue-700">{index + 1}.</span>{step}</span>
+                      {index < project.workflow.length - 1 && <Icon name="arrow" size={13} className="shrink-0 text-muted" />}
+                    </li>
+                  ))}
+                </ol>
+              )}
+              <ul className="space-y-3">{project.details.map((item) => <li key={item} className="flex gap-3"><span className="mt-2.5 text-[10px] text-lime">—</span>{item}</li>)}</ul>
+            </DetailSection>
             {caseSections.map((section, sectionIndex) => (
               <DetailSection key={section.key} number={String(4 + sectionIndex).padStart(2, '0')} title={section.title}>
                 <div className="space-y-6">
@@ -80,9 +97,26 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
             ))}
             {summarySections.map((section, index) => (
               <DetailSection key={section.key} number={String(4 + caseSections.length + index).padStart(2, '0')} title={section.title}>
+                {section.note && <p className="mb-4 text-muted">{section.note}</p>}
                 <ul className="space-y-3">{section.items.map((item) => <li key={item} className="flex gap-3"><span className="mt-2.5 text-[10px] text-lime">—</span>{item}</li>)}</ul>
               </DetailSection>
             ))}
+            {project.evidence?.length > 0 && (
+              <DetailSection number={String(4 + caseSections.length + summarySections.length).padStart(2, '0')} title="코드·설정 자료">
+                {project.evidenceNote && <p className="mb-4 text-muted">{project.evidenceNote}</p>}
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {project.evidence.map((source) => (
+                    <li key={source.url} className="min-w-0">
+                      <a href={source.url} target="_blank" rel="noreferrer" className="focus-ring block h-full rounded-xl border border-line bg-[#f7f8fa] p-4 transition-colors hover:border-blue-200 hover:bg-blue-50">
+                        <span className="flex items-start justify-between gap-3 font-semibold text-ink">{source.label}<Icon name="external" size={15} className="mt-1 shrink-0 text-muted" /></span>
+                        <span className="mt-2 block text-xs leading-6 text-muted">{source.description}</span>
+                        <span className="sr-only"> (새 탭에서 열기)</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </DetailSection>
+            )}
           </div>
 
           {projectLinks.length > 0 && <Reveal><div className="mt-8 flex flex-wrap gap-3">{projectLinks.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="focus-ring inline-flex items-center gap-2 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90">{link.label} <Icon name="external" size={14} /></a>)}</div></Reveal>}

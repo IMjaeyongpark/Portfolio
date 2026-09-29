@@ -19,13 +19,20 @@ export default function ProjectCard({ project, index, label = 'PROJECT', basePat
       <div className={`project-visual relative flex h-48 items-center justify-center overflow-hidden border-b border-line bg-gradient-to-br ${visualStyles[project.tone] || visualStyles.blue}`}>
         {project.architecture ? <img src={project.architecture} alt="" loading="lazy" decoding="async" className="h-full w-full bg-white object-contain p-3 pt-12 transition-transform duration-500 group-hover:scale-[1.025]" /> : <><span aria-hidden="true" className="absolute -right-8 -bottom-24 size-64 rounded-full border border-white/90 bg-white/20" /><span aria-hidden="true" className="absolute -right-2 -bottom-16 size-48 rounded-full border border-white/90" /><span className="relative text-7xl font-light tracking-[-0.08em] text-slate-500/35">{String(index + 1).padStart(2, '0')}</span></>}
         <div className="absolute top-4 left-4 z-[1] flex items-center gap-2">
-          <span className="rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold tracking-wider text-ink backdrop-blur">{label}</span>
+          <span className="rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold tracking-wider text-ink backdrop-blur">{project.experience || label}</span>
         </div>
         <span className="absolute top-4 right-4 z-[1] rounded-full border border-white/70 bg-white/90 px-2.5 py-1 text-[10px] font-medium text-muted backdrop-blur">{project.period}</span>
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col break-keep p-6 [overflow-wrap:anywhere]">
         <h3 className="text-xl font-bold tracking-[-0.03em] text-ink transition-colors group-hover:text-lime">{project.title}</h3>
+        {project.status && <p className="mt-2 text-xs leading-5 text-muted">{project.status}</p>}
         <p className="mt-3 text-sm leading-6 text-muted">{project.description}</p>
+        {project.outcome && (
+          <div className="mt-4 rounded-xl border border-blue-100 bg-blue-50/70 px-4 py-3">
+            <p className="text-[10px] font-semibold text-blue-700">결과·진행 상태</p>
+            <p className="mt-1 text-sm leading-6 font-medium text-ink">{project.outcome}</p>
+          </div>
+        )}
         <div className="mt-5 flex flex-wrap gap-2">{project.skills.slice(0, 4).map((skill) => <SkillBadge key={skill} tone={project.tone}>{skill}</SkillBadge>)}{project.skills.length > 4 && <SkillBadge tone={project.tone}>+{project.skills.length - 4}</SkillBadge>}</div>
         <ul className="mt-6 space-y-2 text-xs leading-5 text-[#4e5968]">{project.role.slice(0, 2).map((item) => <li key={item} className="flex gap-2"><span className="mt-2 size-1 shrink-0 rounded-full bg-lime" />{item}</li>)}</ul>
         <div className="mt-auto pt-6"><div className="flex items-center justify-between gap-4 border-t border-line/70 pt-4">

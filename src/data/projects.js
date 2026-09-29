@@ -12,9 +12,13 @@ const getPeriodDates = (period) => {
 const projectItems = [
   {
     slug: 'hyper-v-iac',
+    priority: 2,
+    experience: '사내 테스트',
+    status: '사내 테스트 서버에 도입해 사용 테스트 중',
+    outcome: '서버 준비 과정을 코드로 재사용 · 사용 테스트 중',
     tone: 'blue',
     title: 'Hyper-V 테스트 VM 생성·설정 자동화',
-    description: '프로젝트마다 반복하던 WEB·WAS·DB 서버 준비를 IaC로 전환',
+    description: '반복하던 WEB·WAS·DB VM 준비를 코드로 재사용하도록 구성하고 사내 테스트 서버에 도입했습니다.',
     period: '2026.08 — 2026.09',
     skills: ['Hyper-V', 'Rocky Linux', 'Terraform', 'Ansible', 'Packer', 'PowerShell', 'IaC'],
     purpose: '신규 프로젝트마다 수동으로 준비하던 WEB·WAS·DB 테스트 VM의 생성과 초기 설정을 자동화했습니다. 서버 사양과 설정을 코드로 재사용할 수 있도록 구성했으며, 현재 사내 테스트 서버에 도입해 사용 테스트 중입니다.',
@@ -24,12 +28,13 @@ const projectItems = [
       '프로젝트별 서버 설정·Terraform 상태 분리',
       '설정 중복·기존 VM 충돌을 확인하는 검증 로직 작성',
     ],
+    workflow: ['기본 이미지 준비', '프로젝트별 서버 정의', 'VM 생성', 'OS 초기 설정'],
     details: [
-      '반복 설치에 사용할 Rocky Linux 기본 이미지를 Packer·Kickstart로 만들고, VM별 사양과 IP는 servers.yml에서 관리하도록 구성했습니다.',
-      'Terraform에서 로컬 PowerShell을 실행해 기본 디스크를 복제하고 Hyper-V VM을 생성하도록 연결했습니다.',
-      'Ansible 제어 VM에서 고정 IP·Docker·디스크 확장·SSH·방화벽 설정을 적용하도록 구성했습니다.',
-      '프로젝트별 Terraform 상태를 분리하고, 중복된 VM 이름·IP와 관리 대상이 아닌 VM·디스크의 충돌을 적용 전에 확인하도록 했습니다.',
-      'VM 설정 재적용 시 기존 VM이 삭제되지 않도록 생성·삭제 관리와 설정 적용을 분리하고, 관련 모의 테스트를 작성했습니다.',
+      'Packer·Kickstart로 Rocky Linux 기본 이미지를 준비하고, 프로젝트마다 달라지는 VM 사양과 IP는 servers.yml에 선언하도록 구성했습니다.',
+      '로컬 테스트 버전에서는 Terraform이 PowerShell을 실행해 기본 디스크를 복제하고 Hyper-V VM을 생성하도록 연결했습니다.',
+      'VM 생성 후 Ansible 제어 VM에서 고정 IP·Docker·디스크 확장·SSH·방화벽 설정을 적용하도록 구성했습니다.',
+      '프로젝트별 Terraform 상태를 분리하고, VM 이름·IP 중복과 관리 대상이 아닌 VM·디스크의 충돌을 적용 전에 확인하는 로직을 작성했습니다.',
+      '설정 재적용 시 기존 VM이 삭제되지 않도록 VM 생성·삭제 관리와 설정 적용을 분리했습니다. 충돌·재적용·삭제 흐름의 모의 테스트 코드도 작성했습니다.',
     ],
     challenges: [
       {
@@ -38,6 +43,12 @@ const projectItems = [
         result: '서버 준비 과정을 코드로 재사용할 수 있게 했습니다. 현재 사내 테스트 서버에서 VM 생성·설정·삭제 흐름을 사용 테스트 중입니다.',
       },
     ],
+    evidenceNote: '공개 템플릿은 Terraform Provider 기반이며, 로컬 테스트 버전의 Terraform·PowerShell 구성과 차이가 있습니다. 공개 자료에는 로컬 버전의 VM 보호 로직과 모의 테스트 실행 결과가 포함되어 있지 않습니다.',
+    evidence: [
+      { label: '공개 템플릿 README', url: 'https://github.com/IMjaeyongpark/rocky-hyperv-template/blob/main/README.md', description: '공개 버전의 구성과 실행 절차, 테스트 중인 범위' },
+      { label: 'Packer 이미지 구성', url: 'https://github.com/IMjaeyongpark/rocky-hyperv-template/blob/main/packer/rocky9.pkr.hcl', description: 'Rocky Linux 기본 이미지 빌드 설정' },
+      { label: 'Ansible 초기 설정', url: 'https://github.com/IMjaeyongpark/rocky-hyperv-template/blob/main/ansible/roles/rocky_server/tasks/main.yml', description: '네트워크·패키지·디스크·보안 설정 작업' },
+    ],
     github: 'https://github.com/IMjaeyongpark/rocky-hyperv-template',
     architecture: hypervIacArchitecture,
     architectureAlt: 'Packer로 Rocky Linux 기본 이미지를 만들고 Terraform과 Ansible로 Hyper-V 가상 머신을 구성하는 IaC 흐름',
@@ -45,24 +56,29 @@ const projectItems = [
   },
   {
     slug: 'gitops-devops',
+    priority: 3,
+    experience: '개인 프로젝트',
+    status: '개인 프로젝트',
+    outcome: '소스 커밋과 배포 이미지 버전을 연결한 GitOps 흐름 구축',
     tone: 'lime',
     title: 'Kubernetes GitOps 배포 파이프라인 구축',
-    description: '코드 변경부터 이미지 빌드·배포 설정 갱신·클러스터 반영까지 자동화',
+    description: '코드 변경이 이미지 빌드와 배포 설정 갱신을 거쳐 클러스터에 반영되도록 개인 환경을 구축했습니다.',
     period: '2026.06 — 2026.08',
     skills: ['GCP', 'Kubernetes', 'Jenkins', 'Nexus', 'Argo CD', 'Helm', 'Prometheus', 'Grafana', 'GitHub App'],
-    purpose: 'Git의 배포 설정을 기준으로 애플리케이션 변경이 Kubernetes까지 반영되는 과정을 직접 구성했습니다. Jenkins는 빌드와 이미지 저장, 배포 설정 갱신을 맡고 Argo CD는 클러스터 반영을 맡도록 역할을 나눴습니다.',
+    purpose: 'GitOps 배포 흐름을 직접 구성하기 위한 개인 프로젝트입니다. 애플리케이션 코드 변경을 Jenkins 빌드와 Nexus 이미지 저장으로 연결하고, 별도 배포 저장소의 변경을 Argo CD가 Kubernetes에 반영하도록 구성했습니다.',
     role: [
       'Jenkins·Nexus 기반 빌드·이미지 저장 파이프라인 구성',
       'Helm·Argo CD 기반 GitOps 배포 자동화',
       'GCP VM 기반 Kubernetes 클러스터 구성',
-      'Prometheus·Grafana 기반 모니터링 구성',
+      'Prometheus·Grafana Helm 설정 및 Argo CD 연동 구성',
     ],
+    workflow: ['애플리케이션 코드 변경', 'Jenkins 빌드·테스트', 'Nexus 이미지 저장', 'Helm 이미지 태그 갱신', 'Argo CD 동기화'],
     details: [
-      '애플리케이션 소스와 배포 설정을 별도 저장소로 나누고, 배포할 이미지 버전을 Git에서 관리하도록 구성했습니다.',
-      'Jenkins에서 Spring Boot 백엔드를 빌드·테스트하고 React 프론트엔드를 빌드한 뒤, 각각 Docker 이미지로 만들어 Nexus에 저장했습니다.',
-      '코드 버전과 배포 이미지를 연결할 수 있도록 Git 커밋 ID를 이미지 태그로 사용하고, Jenkins가 Helm values.yaml을 갱신하도록 했습니다.',
-      'Argo CD가 배포 저장소의 변경을 감지해 Kubernetes에 반영하도록 연결하고, Helm으로 Service·Ingress·상태 확인 설정을 관리했습니다.',
-      'Prometheus·Grafana를 연결해 Kubernetes 클러스터와 애플리케이션 상태를 확인할 수 있도록 구성했습니다.',
+      '애플리케이션과 배포 설정을 별도 저장소로 나눴습니다. Jenkins는 애플리케이션을 체크아웃한 뒤 백엔드의 Gradle 빌드·테스트와 프론트엔드의 npm 빌드를 실행하도록 구성했습니다.',
+      'git rev-parse --short HEAD로 얻은 애플리케이션의 짧은 커밋 ID를 IMAGE_TAG로 사용했습니다. 백엔드·프론트엔드 이미지를 같은 태그로 만들어 Nexus에 저장하므로 이미지 버전을 소스 커밋과 연결할 수 있습니다.',
+      'Jenkins가 배포 저장소를 받아 helm/values.yaml의 backendTag·frontendTag를 해당 커밋 ID로 갱신하고 커밋·푸시하도록 구성했습니다.',
+      'Argo CD Application이 배포 저장소의 main 브랜치와 Helm 차트를 추적해 자동 동기화하도록 설정했습니다. Helm 템플릿에는 Service·Ingress와 Readiness·Liveness Probe를 정의했습니다.',
+      'kube-prometheus-stack의 Prometheus·Grafana 배포 설정과 별도 Argo CD Application을 작성했습니다.',
     ],
     challenges: [
       {
@@ -73,6 +89,16 @@ const projectItems = [
     ],
     improvements: [
       'GitOps 전체 흐름을 구성하는 데 집중해 백엔드와 프론트엔드를 하나의 Jenkins 파이프라인에서 빌드했습니다. 소스 디렉터리와 Docker 이미지는 분리해 두었으며, 배포 주기가 달라지면 파이프라인도 각각 구성하는 방향을 고려하고 있습니다.',
+      '현재 Jenkinsfile은 프론트엔드 빌드만 실행합니다. 프론트엔드 테스트 실행과 배포 실패·이전 이미지 복구 시나리오는 추가 검증 대상으로 두고 있습니다.',
+    ],
+    evidenceNote: '아래 링크에서 Jenkins 빌드·이미지 태그 갱신과 Helm·Argo CD 배포 설정을 확인할 수 있습니다.',
+    evidence: [
+      { label: 'Jenkins 빌드·태그 갱신', url: 'https://github.com/IMjaeyongpark/deploy-history-app/blob/main/Jenkinsfile', description: '백엔드 빌드·테스트, 프론트엔드 빌드, 이미지 저장과 배포 저장소 갱신' },
+      { label: 'Helm 이미지 태그', url: 'https://github.com/IMjaeyongpark/deploy-history-manifest/blob/main/helm/values.yaml', description: 'backendTag·frontendTag로 관리하는 배포 이미지 버전' },
+      { label: 'Argo CD 동기화 설정', url: 'https://github.com/IMjaeyongpark/deploy-history-manifest/blob/main/argocd/application.yaml', description: '추적 브랜치·Helm 경로와 자동 동기화 정책' },
+      { label: '백엔드 배포·Probe 설정', url: 'https://github.com/IMjaeyongpark/deploy-history-manifest/blob/main/helm/templates/backend-deployment.yaml', description: '이미지 태그 참조와 Readiness·Liveness Probe 정의' },
+      { label: '모니터링 Helm 설정', url: 'https://github.com/IMjaeyongpark/deploy-history-manifest/blob/main/monitoring/values-monitoring.yaml', description: 'Prometheus·Grafana 배포 구성 값' },
+      { label: '배포 저장소 README', url: 'https://github.com/IMjaeyongpark/deploy-history-manifest/blob/main/README.md', description: '저장소 구조와 Helm·Argo CD 적용 절차' },
     ],
     github: '',
     links: [
@@ -93,24 +119,36 @@ const projectItems = [
   },
   {
     slug: 'gis-3d-building',
+    priority: 1,
+    experience: '실무',
+    status: '서비스 배포 설정 전환·클라우드 이전 담당',
+    outcome: 'Docker Compose → KT Cloud Kubernetes·Helm 이전',
     tone: 'blue',
     title: 'GIS·3D 건물정보 서비스 유지보수',
-    description: '온프레미스 Docker Compose 기반 MSA를 KT Cloud Kubernetes로 이전',
+    description: '온프레미스에서 운영하던 서비스의 배포 설정을 전환하고 KT Cloud Kubernetes로 이전했습니다.',
     period: '2026.03 — 2026.05',
     skills: ['Kubernetes', 'Helm', 'KT Cloud', 'Docker', 'Nginx', 'NestJS', 'VWorld API'],
-    purpose: '온프레미스에서 Docker Compose로 운영하던 GIS·3D 건물정보 서비스의 KT Cloud Kubernetes 이전을 담당했습니다. 기존 MSA 구조를 분석해 배포 설정을 전환하고, NestJS 백엔드 유지보수와 외부 공간정보 API 연동을 함께 수행했습니다.',
+    purpose: '온프레미스 Docker Compose 기반 GIS·3D 건물정보 서비스를 KT Cloud Kubernetes로 이전하는 업무에 참여했습니다. 담당 범위는 기존 서비스·배포 구조 분석, Kubernetes 리소스 전환, 서비스별 Helm 차트 작성과 배포였으며 NestJS 백엔드 유지보수도 함께 수행했습니다.',
     role: [
       'Docker Compose 배포 설정의 Kubernetes 전환',
       '서비스별 Helm 차트 작성 및 KT Cloud 배포',
       '기존 MSA 서비스 구조와 배포 설정 분석',
       'NestJS 백엔드 유지보수 및 VWorld WFS 데이터 3종 프록시 연동',
     ],
+    workflow: ['Compose 서비스 구성 분석', 'Kubernetes 리소스 전환', '서비스별 Helm 차트 작성', 'KT Cloud 배포'],
     details: [
-      '기존 Docker Compose 파일과 MSA 구조를 분석해 서비스별 배포 구성을 파악했습니다.',
-      'Compose 기반 배포 설정을 Kubernetes 리소스로 옮기고, 서비스별 Helm 차트로 관리하도록 구성했습니다.',
-      '작성한 Helm 차트를 사용해 KT Cloud Kubernetes 환경에 MSA 서비스를 배포했습니다.',
+      '기존 Docker Compose 파일과 MSA 구조를 분석해 서비스별 실행·연결 구성을 파악하고 이전할 배포 설정을 정리했습니다.',
+      '서비스별 배포 설정을 Kubernetes 리소스로 전환한 뒤 Helm 차트로 묶어 배포 단위를 관리했습니다. 서비스 구성 분석부터 차트 작성·배포까지가 담당 범위입니다.',
+      '작성한 Helm 차트로 KT Cloud Kubernetes에 서비스를 배포했습니다.',
       'VWorld API의 건축물대장 정보 관련 WFS 데이터 3종을 백엔드에서 프록시 방식으로 연동했습니다.',
       '기존 NestJS 코드 구조를 분석하고 서비스 유지보수에 필요한 백엔드 기능을 구현했습니다.',
+    ],
+    challenges: [
+      {
+        problem: '기존 Docker Compose의 서비스 구성을 유지하면서 Kubernetes에서 배포·관리할 수 있는 설정으로 옮겨야 했습니다.',
+        solution: '기존 MSA와 Compose 배포 설정을 분석하고, 서비스별 Kubernetes 리소스와 Helm 차트를 작성해 KT Cloud에 배포했습니다.',
+        result: '담당 서비스의 배포 설정을 Kubernetes·Helm으로 전환하고 KT Cloud Kubernetes에 배포했습니다.',
+      },
     ],
     troubleshooting: [],
     github: '',
@@ -120,28 +158,32 @@ const projectItems = [
   },
   {
     slug: 'public-data-open-api',
+    priority: 4,
+    experience: '실무',
+    status: '담당 서비스 배포·운영 및 특정 조회 개선',
+    outcome: '해당 대용량 조회 시간 1분 이상 → 3초 이하',
     tone: 'violet',
     title: '공공데이터 Open API 배포·운영 및 성능 개선',
-    description: '온프레미스 배포와 망 분리 환경의 API 중계, 대용량 조회 타임아웃 개선',
+    description: '504 타임아웃이 발생하던 특정 조회를 분석하고 인덱스를 적용해 1분 이상에서 3초 이하로 줄였습니다.',
     period: '2025.10 — 2026.05',
     skills: ['Docker', 'Rocky Linux', 'Nginx', 'PostgreSQL', 'Spring Boot', 'Spring Batch', 'React'],
     purpose: '공공데이터를 수집·가공해 Open API로 제공하는 시스템의 개발과 온프레미스 배포·운영을 담당했습니다. DMZ·내부망 사이의 API 연동을 구성하고, 대용량 조회에서 발생한 타임아웃을 개선했습니다.',
     role: [
+      'PostgreSQL 인덱스 적용을 통한 조회 성능 개선',
       'Docker·Rocky Linux 기반 온프레미스 배포·운영',
       'Nginx API 중계 및 망 분리 환경의 연동 문제 대응',
-      'PostgreSQL 인덱스 적용을 통한 조회 성능 개선',
       'Spring Batch 기반 데이터 수집·정제·적재 자동화',
       'React 기반 API 데이터 관리 화면 개발',
     ],
     details: [
       '애플리케이션을 Docker 이미지로 구성해 온프레미스 Rocky Linux 서버에 배포하고 운영했습니다.',
       'DMZ·내부망 사이에서 Nginx로 API 요청을 중계하고, 연동 문제가 발생하면 포트·방화벽 설정을 점검했습니다.',
-      '주요 조회 조건에 맞춰 PostgreSQL 인덱스를 적용해 1분 이상 걸리던 대용량 테이블 조회를 3초 이하로 줄였습니다.',
+      '40억 건 이상 저장된 테이블에서 타임아웃이 발생한 특정 조회의 조건을 분석하고 PostgreSQL 인덱스를 적용했습니다. 개선 결과는 해당 조회에 한정해 1분 이상에서 3초 이하로 확인했습니다.',
       'Spring Batch로 데이터 수집·정제·적재를 정기 실행하고, React로 운영자가 데이터를 조회·관리하는 화면을 개발했습니다.',
     ],
     troubleshooting: [
       {
-        problem: '40억 건 이상의 데이터가 저장된 테이블 조회에 1분 이상이 소요되어 HTTP 504 Gateway Timeout이 발생했습니다.',
+        problem: '40억 건 이상 저장된 테이블의 특정 조회에 1분 이상이 걸리면서 해당 API 요청에서 HTTP 504 Gateway Timeout이 발생했습니다.',
         solution: '해당 요청의 조회 조건과 사용 패턴을 확인하고, 조건에 사용되는 컬럼에 PostgreSQL 인덱스를 적용했습니다.',
         result: '해당 조회 시간을 1분 이상에서 3초 이하로 줄이고, 이 조회에서 발생하던 API 타임아웃을 해소했습니다.',
       },
@@ -153,9 +195,13 @@ const projectItems = [
   },
   {
     slug: 'national-park-databank',
+    priority: 5,
+    experience: '실무',
+    status: '파일 제공·저장 공간 유지보수 담당',
+    outcome: '파일 저장 디렉터리 사용률 약 98% → 20%',
     tone: 'orange',
     title: '국립공원 데이터뱅크 플랫폼 하자보수',
-    description: '대용량 CSV 다운로드 문제와 파일 저장 공간 부족 대응',
+    description: '파일 제공 구조를 분석하고 저장 공간 확보·과거 파일 정리로 디렉터리 사용률을 약 98%에서 20%로 낮췄습니다.',
     period: '2026.02 — 2026.08',
     skills: ['Spring Batch', 'NFS', 'PostgreSQL', 'Spring', 'JSP'],
     purpose: '국립공원 데이터를 정기적으로 추출해 웹에서 제공하는 데이터뱅크 플랫폼의 하자보수를 담당했습니다. 대용량 CSV를 Excel에서 확인하지 못하는 문제와 파일 저장 공간 부족에 대응했습니다.',
@@ -169,7 +215,8 @@ const projectItems = [
       '기존 Spring Batch의 PostgreSQL 데이터 추출과 파일 생성 흐름을 분석해 CSV 분할 처리를 적용했습니다.',
       '한 번에 생성하던 CSV를 50만 건 단위로 나누고, 하나의 ZIP 파일로 내려받도록 변경했습니다.',
       'JSP 조회·다운로드 화면을 변경한 파일 제공 구조에 맞춰 개선했습니다.',
-      'NFS로 다른 서버의 저장 공간을 연결한 뒤, 서비스가 최신 파일을 참조하는 구조를 확인하고 과거 파일은 압축해 별도 백업 디렉터리로 분리했습니다.',
+      '파일 생성·조회 흐름과 관련 테이블을 먼저 분석해 서비스가 최신 파일을 참조하는 구조를 파악했습니다.',
+      'NFS로 추가 저장 공간을 확보하고, 과거 파일을 압축해 별도 백업 디렉터리로 분리했습니다. 정리 후 기존 파일 조회 기능이 유지되는지 확인하고 해당 저장 디렉터리의 사용률을 확인했습니다.',
     ],
     troubleshooting: [
       {
@@ -178,9 +225,9 @@ const projectItems = [
         result: '사용자가 ZIP 파일을 한 번 내려받은 뒤 각 CSV를 Excel에서 열어 데이터를 나누어 확인할 수 있게 했습니다.',
       },
       {
-        problem: '용량 500GB의 파일 저장 디렉터리 사용률이 약 98%에 도달해 정기 파일 생성과 서비스 운영에 영향을 줄 위험이 있었습니다.',
-        solution: '다른 서버의 저장 공간을 NFS로 연결해 용량을 확보한 뒤, 파일 생성·조회 구조와 관련 테이블을 분석했습니다. 서비스에서는 최신 파일만 사용하는 것을 확인하고 과거 파일을 압축해 별도 백업 디렉터리에 관리했습니다.',
-        result: '기존 파일 조회 기능을 유지하면서 저장 디렉터리 사용률을 약 98%에서 20% 수준으로 낮춰 안정적인 파일 생성 공간을 확보했습니다.',
+        problem: '파일 저장 디렉터리 사용률이 약 98%에 도달해 정기 파일 생성에 필요한 공간이 부족해질 위험이 있었습니다.',
+        solution: '파일 생성·조회 흐름과 관련 테이블을 분석해 최신 파일의 참조 방식을 파악했습니다. NFS로 추가 저장 공간을 확보한 뒤 과거 파일을 압축·분리하고, 기존 파일 조회 기능이 유지되는지 확인했습니다.',
+        result: '추가 저장 공간 확보와 과거 파일 정리를 함께 진행한 뒤, 기존 조회 기능을 유지하면서 해당 디렉터리 사용률이 약 98%에서 20% 수준으로 낮아진 것을 확인했습니다.',
       },
     ],
     github: '',
@@ -190,9 +237,12 @@ const projectItems = [
   },
   {
     slug: 'streaming-partner',
+    priority: 6,
+    experience: '대학 프로젝트',
+    status: '팀 프로젝트 · 백엔드·배포 환경 담당',
     tone: 'cyan',
     title: '나의 방송파트너',
-    description: '3개 플랫폼의 실시간 채팅 API 통합과 Spring 백엔드 배포 자동화',
+    description: '플랫폼마다 나뉜 채팅을 한 화면에서 받도록 API를 구성하고 Spring 백엔드 배포를 자동화했습니다.',
     period: '2023.03 — 2024.06',
     skills: ['AWS EC2', 'GitHub Actions', 'AWS CodeDeploy', 'AWS S3', 'Spring Boot', 'Flask', 'Python', 'SSE', 'JWT', 'PostgreSQL', 'MongoDB Atlas'],
     purpose: '유튜브·치지직·숲 채팅을 한 화면에서 확인하는 서비스의 백엔드와 배포 환경을 담당했습니다. Flask 채팅 API와 Spring Boot API를 구성하고, 외부 감정 분석 API 연동과 EC2 배포 자동화를 구현했습니다.',
@@ -229,13 +279,19 @@ const projectItems = [
       youtubeId: 'g4iZemAs8WM',
       title: '라이브 채팅 감정 분석 기술 프로젝트 소개 영상',
     },
+    evidence: [
+      { label: 'Spring 백엔드 배포 Workflow', url: 'https://github.com/IMjaeyongpark/MyBroadcastPartner-Spring/blob/main/.github/workflows/main.yml', description: '빌드 결과물을 S3에 저장하고 CodeDeploy에 배포를 요청하는 구성' },
+    ],
     architecture: streamingPartnerArchitecture,
     architectureAlt: 'AWS 기반 나의 방송파트너 서비스 아키텍처',
     images: [],
   },
 ]
 
-export const projects = projectItems.sort((a, b) => {
+export const projects = [...projectItems].sort((a, b) => {
+  const priorityDifference = (a.priority ?? Number.MAX_SAFE_INTEGER) - (b.priority ?? Number.MAX_SAFE_INTEGER)
+  if (priorityDifference !== 0) return priorityDifference
+
   const aDates = getPeriodDates(a.period)
   const bDates = getPeriodDates(b.period)
   const endDateDifference = (bDates.at(-1) ?? 0) - (aDates.at(-1) ?? 0)

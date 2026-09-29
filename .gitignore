@@ -33,3 +33,6 @@ Thumbs.db
 
 # Private resume files
 *이력서*.pdf
+
+# Local portfolio review notes
+/LOCAL_REVIEW_NOTES.md
