@@ -35,7 +35,7 @@ export default function App() {
           </div>
         </main>
       ) : (
-        <main><Intro /><Skills /><Projects /><MiniProjects /><AIEnvironment /><Career /></main>
+        <main><Intro /><Skills /><Projects /><MiniProjects /><Career /><AIEnvironment /></main>
       )}
       <Footer />
     </div>
