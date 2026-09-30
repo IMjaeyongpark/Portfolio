@@ -11,6 +11,20 @@ import { projects } from './data/projects'
 import { miniProjects } from './data/miniProjects'
 
 export default function App() {
+  useEffect(() => {
+    const root = document.documentElement
+    const navigationKeys = new Set(['Tab', 'Enter', ' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'])
+    const keyboard = (event) => { if (navigationKeys.has(event.key)) root.dataset.input = 'keyboard' }
+    const pointer = () => { root.dataset.input = 'pointer' }
+    document.addEventListener('keydown', keyboard, true)
+    document.addEventListener('pointerdown', pointer, true)
+    return () => {
+      document.removeEventListener('keydown', keyboard, true)
+      document.removeEventListener('pointerdown', pointer, true)
+      delete root.dataset.input
+    }
+  }, [])
+
   const [, type, slug] = window.location.pathname.split('/')
   const isMiniProject = type === 'mini-projects'
   const project = type === 'projects'
@@ -21,13 +35,14 @@ export default function App() {
   const isProjectRoute = type === 'projects' || isMiniProject
 
   return (
-    <div className="min-h-screen overflow-hidden bg-white text-ink selection:bg-lime selection:text-white">
+    <div className="min-h-screen overflow-x-clip bg-white text-ink">
+      <a href="#main-content" className="skip-link focus-ring">본문으로 바로가기</a>
       <Header />
       <div className="h-16 bg-white" aria-hidden="true" />
       {project ? (
         <ProjectDetail project={project} backHref={isMiniProject ? '/#mini-projects' : '/#projects'} />
       ) : isProjectRoute ? (
-        <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[#f7f8fa] px-5 text-center">
+        <main id="main-content" tabIndex={-1} className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-surface px-5 text-center">
           <div>
             <p className="text-sm font-semibold text-lime">404</p>
             <h1 className="mt-3 text-3xl font-bold text-ink">프로젝트를 찾을 수 없습니다.</h1>
@@ -35,9 +50,10 @@ export default function App() {
           </div>
         </main>
       ) : (
-        <main><Intro /><Skills /><Projects /><MiniProjects /><Career /><AIEnvironment /></main>
+        <main id="main-content" tabIndex={-1}><Intro /><Skills /><Projects /><MiniProjects /><Career /><AIEnvironment /></main>
       )}
       <Footer />
     </div>
   )
 }
+import { useEffect } from 'react'

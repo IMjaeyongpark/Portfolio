@@ -1,12 +1,17 @@
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #191f28;
+  --color-ink: #202936;
   --color-panel: #ffffff;
-  --color-line: #e5e8eb;
-  --color-muted: #6b7684;
-  --color-lime: #3182f6;
-  --font-sans: "Pretendard Variable", Pretendard, Inter, ui-sans-serif, system-ui, sans-serif;
+  --color-surface: #f7f8fa;
+  --color-line: #dde2e8;
+  --color-muted: #46515f;
+  --color-accent: #245fc6;
+  --color-accent-soft: #edf3ff;
+  /* Compatibility: the old “lime” token is blue. */
+  --color-lime: #245fc6;
+  --font-sans: "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -14,40 +19,65 @@
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --motion-fast: 160ms;
+  --motion-enter: 300ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; background: #ffffff; color: #191f28; }
-button, a { -webkit-tap-highlight-color: transparent; }
-button { font: inherit; }
+body { margin: 0; min-width: 320px; background: var(--color-panel); color: var(--color-ink); }
+button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .5; }
 h1, h2, h3, h4 { word-break: keep-all; overflow-wrap: anywhere; text-wrap: balance; }
-p, li { overflow-wrap: anywhere; }
+p, li { word-break: keep-all; overflow-wrap: anywhere; text-wrap: pretty; }
+a { text-underline-offset: 4px; }
+::selection { background: #dce8fc; color: var(--color-ink); }
 
 @layer components {
   .page-container { @apply mx-auto w-full max-w-5xl px-5 sm:px-6; }
-  .section-space { @apply py-16 sm:py-20; }
-  .eyebrow { @apply mb-3 flex items-center gap-2 text-sm font-semibold text-lime; }
-  .section-title { @apply text-3xl font-bold tracking-[-0.035em] text-ink sm:text-4xl; }
-  .section-copy { @apply mt-3 max-w-2xl text-sm leading-7 text-muted sm:text-base; }
-  .card { @apply rounded-2xl border border-line bg-panel shadow-[0_4px_20px_rgba(15,23,42,0.035)]; }
-  .focus-ring { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime; }
+  .section-space { @apply py-14 sm:py-16; }
+  .section-title { @apply text-3xl leading-tight font-bold tracking-[-0.025em] text-ink sm:text-4xl; }
+  .section-copy { @apply mt-3 max-w-[70ch] text-base leading-7 text-muted; }
+  .card { @apply rounded-2xl border border-line bg-panel; }
+  .focus-ring { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent; }
+  .text-link { @apply inline-flex min-h-11 items-center gap-2 text-sm font-medium text-muted; }
+  .button-primary { @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-[10px] bg-ink px-5 py-3 text-sm font-semibold text-white; }
+  .button-secondary { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] border border-line bg-panel px-4 py-2 text-sm font-medium text-ink; }
+  .experience-badge { @apply inline-flex items-center rounded-md bg-accent-soft px-2.5 py-1 text-[13px] leading-5 font-semibold text-accent; }
+  .icon-surface { @apply flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent; }
 }
 
-@keyframes modal-in {
-  from { opacity: 0; transform: translateY(12px) scale(.99); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.skip-link {
+  position: fixed; top: 12px; left: 20px; z-index: 60;
+  padding: 12px 20px; border-radius: 8px; background: var(--color-ink); color: white;
+  transform: translateY(-160%);
 }
+.skip-link:focus { transform: none; }
 
-.modal-enter { animation: modal-in .2s ease-out; }
+@keyframes hero-enter {
+  from { opacity: .8; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-intro { animation: hero-enter 200ms var(--ease-out); }
 
+/* Visible by default. JS only opts off-screen content into entrance motion. */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
+  /* Keep transitions in both states so entering content actually animates. */
   transition:
-    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--motion-enter) var(--ease-out),
+    transform var(--motion-enter) var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(12px);
 }
 
 .reveal-visible {
@@ -55,26 +85,44 @@ p, li { overflow-wrap: anywhere; }
   transform: translateY(0);
 }
 
-.nav-indicator {
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), width 350ms cubic-bezier(0.22, 1, 0.36, 1), height 350ms cubic-bezier(0.22, 1, 0.36, 1);
+.reveal:focus-within { opacity: 1; transform: none; transition: none; }
+.nav-indicator { transition: transform 200ms var(--ease-in-out); transform-origin: 0 0; }
+.nav-no-motion .nav-indicator { transition: none; }
+.project-card { transition: border-color 100ms ease; }
+.project-open-icon, .button-primary, .button-secondary, .nav-link, .workflow-switch {
+  transition: background-color 100ms ease, color 100ms ease, border-color 100ms ease;
 }
+.pressable { transition: transform 100ms var(--ease-out), background-color 100ms ease, color 100ms ease, border-color 100ms ease; }
+.pressable:active { transform: scale(.98); transition-duration: var(--motion-fast); }
+.pressable:focus-visible:active { transform: none; }
+
+/* Keyboard navigation must not wait for scrolling, entrances or press motion. */
+html[data-input="keyboard"] { scroll-behavior: auto; }
+html[data-input="keyboard"] .reveal { opacity: 1; transform: none; transition: none; }
+html[data-input="keyboard"] .nav-indicator,
+html[data-input="keyboard"] .pressable { transition: none; }
+html[data-input="keyboard"] .pressable:active { transform: none; }
+html[data-input="keyboard"] .hero-intro { animation: none; }
 
 .project-card:has(a:focus-visible) {
-  outline: 2px solid var(--color-lime);
+  outline: 2px solid var(--color-accent);
   outline-offset: 4px;
 }
 
-.project-visual::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgb(15 23 42 / 8%), transparent 50%);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { border-color: #9cb6df; }
+  .project-card:hover .project-open-icon { background: var(--color-accent-soft); color: var(--color-accent); }
+  .button-primary:hover { background: #354152; }
+  .button-secondary:hover, .nav-link:hover, .workflow-switch:hover { background: var(--color-surface); border-color: #b9c6d9; }
+  .nav-link[aria-current="page"]:hover, .workflow-switch[aria-pressed="true"]:hover { background: var(--color-accent-soft); }
+  .text-link:hover { color: var(--color-accent); }
+  .evidence-link:hover .evidence-label { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .group:hover { transform: none; }
+  .reveal, .reveal-pending { opacity: 1; transform: none; transition: none; }
+  .nav-indicator, .pressable { transition: none; }
+  .pressable:active { transform: none; }
+  .hero-intro { animation: none; }
 }

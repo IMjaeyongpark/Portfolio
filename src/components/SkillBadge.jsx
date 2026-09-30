@@ -10,5 +10,5 @@ const toneStyles = {
 export default function SkillBadge({ children, accent = false, tone = 'neutral' }) {
   const colorStyle = accent ? toneStyles.lime : toneStyles[tone] || toneStyles.neutral
 
-  return <span className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold ${colorStyle}`}>{children}</span>
+  return <span className={`inline-flex items-center rounded-md border px-2.5 py-1 text-[13px] leading-5 font-medium ${colorStyle}`}>{children}</span>
 }

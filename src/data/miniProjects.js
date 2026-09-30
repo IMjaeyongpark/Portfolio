@@ -1,6 +1,9 @@
-export const miniProjects = [
+import { sortProjects } from './sortProjects'
+
+const miniProjectItems = [
   {
     slug: 'career-coach-chatbot',
+    cover: { icon: 'backend', title: '면접 질문·학습 로드맵', subtitle: 'Spring Boot · Gemini API' },
     experience: '개인 프로젝트',
     icon: '🤖',
     tone: 'lime',
@@ -30,6 +33,7 @@ export const miniProjects = [
   },
   {
     slug: 'fullstack-board',
+    cover: { icon: 'devops', title: '게시판·배포 자동화', subtitle: 'Jenkins · Docker · Spring Boot' },
     experience: '개인 프로젝트',
     icon: '📜',
     tone: 'blue',
@@ -72,6 +76,7 @@ export const miniProjects = [
   },
   {
     slug: 'dlmo-api',
+    cover: { icon: 'database', title: '생체리듬 예측 API', subtitle: 'Node.js · PostgreSQL' },
     experience: '연구·학습',
     icon: '🌙',
     tone: 'violet',
@@ -108,6 +113,7 @@ export const miniProjects = [
   },
   {
     slug: 'subway-route',
+    cover: { icon: 'backend', title: '최단 경로 탐색', subtitle: 'JavaFX · Dijkstra' },
     experience: '대학 프로젝트',
     icon: '🚇',
     tone: 'orange',
@@ -133,3 +139,5 @@ export const miniProjects = [
     links: [{ label: 'GitHub', url: 'https://github.com/IMjaeyongpark/2022/tree/main/2-2/Basic%20Project2/project/subway' }],
   },
 ]
+
+export const miniProjects = sortProjects(miniProjectItems)

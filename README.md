@@ -10,19 +10,23 @@
 - Vite 7
 - Tailwind CSS 4
 - JavaScript
+- Pretendard Variable (로컬 제공) · Lucide React
 - Vercel
 
 ## 주요 기능
 
 - Intro, Skills, Projects, Mini Projects, Career, AI Workspace 순서의 원 페이지 구성
-- AI Workspace: Codex ECC 템플릿 소개, 구성 카드, 작업 규모별 실행 절차 선택
+- AI Workspace: Codex ECC 템플릿 소개, 구성 목록, 작업 규모별 실행 절차 선택
 - 밝은 배경의 반응형 디자인과 좌측 소개·우측 작업 분야로 구성한 Intro
 - 카테고리별 기술 아이콘과 색상 배지
 - Projects와 Mini Projects에 공통 카드·상세 페이지 적용
 - 카드에 경험 구분(실무·사내 테스트·개인 프로젝트·대학 프로젝트), 결과와 진행 상태 표시
-- 주요 프로젝트는 Kubernetes 이전 → Hyper-V IaC → 개인 GitOps → 실무 운영 개선 → 대학 프로젝트 순서로 노출
+- 주요·미니 프로젝트는 종료일 기준 최신순으로 노출하며, 종료일이 같으면 시작일이 최근인 프로젝트가 먼저 표시됨
 - 상세 페이지에 구현 흐름과 공개 코드·설정 자료 링크 표시
-- 아키텍처, 파이프라인, 스크린샷 갤러리 지원
+- 상세 목차 이동·아키텍처 원본 보기, 본문 바로가기와 키보드 포커스 지원
+- 섹션·기술 카테고리·프로젝트·경력 항목이 처음 보일 때만 실행되는 300ms 등장 효과와 메뉴 인터랙션 (키보드 탐색·모션 감소 설정에서는 이동 효과 생략)
+- 해시가 포함된 `/assets/` 파일의 장기 캐시 (HTML에는 적용하지 않음)
+- 아키텍처, 파이프라인, 스크린샷 갤러리 지원 (WebP·썸네일 최적화와 PNG 원본 유지)
 - GitHub, 프론트엔드, 백엔드, 블로그, Figma, 데모 등 복수 링크 지원
 - 스크롤 위치에 따라 현재 영역을 표시하는 고정 내비게이션
 - 프로젝트 상세 페이지에서 메뉴를 선택하면 홈의 해당 영역으로 이동하는 해시 내비게이션
@@ -65,6 +69,7 @@ src/
 │   ├── AIEnvironment.jsx
 │   ├── ProjectCard.jsx    # 공통 카드 템플릿
 │   ├── ProjectDetail.jsx  # 주요·미니 프로젝트 공통 상세 페이지
+│   ├── ProjectImage.jsx   # 최적화 이미지·원본 대체 로딩
 │   ├── Reveal.jsx
 │   ├── Icon.jsx
 │   └── Footer.jsx
@@ -92,6 +97,8 @@ src/
 | AI 작업 환경·템플릿 GitHub·작업 절차 | `src/data/aiEnvironment.js` |
 | 아키텍처·파이프라인·스크린샷 | `src/assets/projects/` |
 
+색상·타이포그래피·여백·모션 기준은 `DESIGN.md`에 정리되어 있으며, 공통 스타일은 `src/index.css`에서 관리합니다. 이미지에는 `architectureWidth` / `architectureHeight` 또는 갤러리의 `width` / `height`를 함께 지정하면 로딩 중 레이아웃 이동을 줄일 수 있습니다.
+
 상단 메뉴는 `Home · Skills · Projects · Career · AI Workspace`로 구성됩니다. `Projects` 메뉴는 주요 프로젝트와 미니 프로젝트를 함께 가리키며, 각 카드 전체를 선택하면 상세 페이지로 이동합니다.
 
 ## 프로젝트 추가
@@ -104,7 +111,6 @@ import pipelineImage from '../assets/projects/pipeline.png'
 
 {
   slug: 'project-name',
-  priority: 7,
   experience: '개인 프로젝트',
   status: '개인 환경 구축',
   outcome: '구현 결과 또는 현재 사용 테스트 상태',
@@ -161,7 +167,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
 ### 필수 값과 선택 값
 
 - `slug`: 상세 페이지 주소에 사용하는 고유한 영문 식별자입니다.
-- `priority`: 주요 프로젝트의 노출 우선순위입니다. 작은 수가 먼저 표시됩니다. 생략한 프로젝트는 우선순위가 지정된 프로젝트 뒤에 표시되며, 같은 우선순위에서는 기간순으로 정렬합니다. 미니 프로젝트는 배열 순서를 사용합니다.
+- `period`: `2026.01 — 2026.06` 또는 `2026.01.01 — 2026.06.30` 형식의 기간입니다. 주요·미니 프로젝트 모두 종료일 기준 최신순으로 자동 정렬하며, 종료일이 같으면 시작일을 비교합니다. `진행중` 또는 `현재`인 프로젝트는 먼저 표시됩니다.
 - `experience`: 실무·사내 테스트·개인 프로젝트·대학 프로젝트 등 경험의 성격입니다. 카드와 상세 페이지에 표시합니다.
 - `status`, `outcome`: 담당 범위·진행 상태와 결과 요약입니다. 수치가 있다면 해당 조회·디렉터리 등 측정 대상을 함께 적습니다. 생략하면 해당 영역이 숨겨집니다.
 - `workflow`: 주요 구현 앞에 순서대로 표시할 짧은 단계 이름입니다. 생략하면 기존 구현 목록만 표시합니다.
@@ -175,6 +181,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
 - `evidenceNote`, `evidence`: ‘코드·설정 자료’에 표시할 설명과 `{ label, url, description }` 링크 목록입니다. 공개 코드·설정·README와 실제 테스트 결과의 범위를 구분합니다. 회사의 비공개 주소·설정·로그는 추가하지 않습니다.
 - `achievements`: 논문·수상 등 구현 내용과 구분할 성과를 문자열 배열로 작성합니다. 생략하거나 `[]`로 지정하면 ‘성과’ 영역이 숨겨집니다.
 - `architecture`: 없으면 `''`로 지정합니다.
+- `cover`: 아키텍처 이미지가 없는 카드의 대체 커버입니다. `{ icon: 'database', title: '프로젝트 주제', subtitle: '관련 기술·기능' }` 형식으로 작성합니다. `icon`은 `Icon.jsx`의 아이콘 이름을 사용하며, 생략하면 기본 코드 아이콘·프로젝트명·기술 목록이 표시됩니다. 상세 페이지의 아키텍처 이미지로 사용되지는 않습니다.
 - `images`: 없으면 `[]`로 지정합니다. 여러 장을 넣으면 반응형 갤러리로 표시됩니다.
 - `video`: YouTube 영상을 상세 페이지에서 바로 재생하려면 `youtubeId`와 `title`을 지정합니다. 영상이 없으면 생략합니다.
 

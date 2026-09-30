@@ -3,16 +3,17 @@ import gisBuildingArchitecture from '../assets/projects/gis-3d-building-kt-cloud
 import gitopsPipeline from '../assets/projects/gitops-pipeline.png'
 import streamingPartnerArchitecture from '../assets/projects/streaming-partner-architecture.png'
 import hypervIacArchitecture from '../assets/projects/hyperv-iac-architecture.png'
-
-const getPeriodDates = (period) => {
-  const dates = period.match(/\d{4}\.\d{2}/g) ?? []
-  return dates.map((date) => Number(date.replace('.', '')))
-}
+import gitopsOptimized from '../assets/projects/gitops-architecture.webp'
+import gisOptimized from '../assets/projects/gis-3d-building-kt-cloud-architecture.webp'
+import hypervOptimized from '../assets/projects/hyperv-iac-architecture.webp'
+import streamingOptimized from '../assets/projects/streaming-partner-architecture.webp'
+import hypervThumbnail from '../assets/projects/hyperv-iac-architecture-thumbnail.webp'
+import streamingThumbnail from '../assets/projects/streaming-partner-architecture-thumbnail.webp'
+import { sortProjects } from './sortProjects'
 
 const projectItems = [
   {
     slug: 'hyper-v-iac',
-    priority: 2,
     experience: '사내 테스트',
     status: '사내 테스트 서버에 도입해 사용 테스트 중',
     outcome: '서버 준비 과정을 코드로 재사용 · 사용 테스트 중',
@@ -51,14 +52,17 @@ const projectItems = [
     ],
     github: 'https://github.com/IMjaeyongpark/rocky-hyperv-template',
     architecture: hypervIacArchitecture,
+    architectureOptimized: hypervOptimized,
+    architectureThumbnail: hypervThumbnail,
+    architectureWidth: 1536,
+    architectureHeight: 1024,
     architectureAlt: 'Packer로 Rocky Linux 기본 이미지를 만들고 Terraform과 Ansible로 Hyper-V 가상 머신을 구성하는 IaC 흐름',
     images: [],
   },
   {
     slug: 'gitops-devops',
-    priority: 3,
     experience: '개인 프로젝트',
-    status: '개인 프로젝트',
+    status: '빌드·이미지 저장·배포 동기화 흐름 구축',
     outcome: '소스 커밋과 배포 이미지 버전을 연결한 GitOps 흐름 구축',
     tone: 'lime',
     title: 'Kubernetes GitOps 배포 파이프라인 구축',
@@ -108,10 +112,15 @@ const projectItems = [
       { label: 'Figma', url: 'https://www.figma.com/design/5l6SJI7bQfSXs783Fsslby/Untitled?node-id=0-1&t=HSZxkm7IFNteKsCM-1' },
     ],
     architecture: gitopsArchitecture,
+    architectureOptimized: gitopsOptimized,
+    architectureWidth: 1507,
+    architectureHeight: 637,
     architectureAlt: 'GCP Kubernetes, Jenkins, Nexus, Argo CD, Prometheus, Grafana로 구성한 GitOps CI/CD Architecture',
     images: [
       {
         src: gitopsPipeline,
+        width: 1286,
+        height: 219,
         alt: 'Code Push부터 Jenkins CI, Nexus Image Push, Argo CD Sync, Kubernetes 배포, Monitoring으로 이어지는 Pipeline',
         caption: 'GitOps CI/CD Pipeline',
       },
@@ -119,7 +128,6 @@ const projectItems = [
   },
   {
     slug: 'gis-3d-building',
-    priority: 1,
     experience: '실무',
     status: '서비스 배포 설정 전환·클라우드 이전 담당',
     outcome: 'Docker Compose → KT Cloud Kubernetes·Helm 이전',
@@ -153,12 +161,15 @@ const projectItems = [
     troubleshooting: [],
     github: '',
     architecture: gisBuildingArchitecture,
+    architectureOptimized: gisOptimized,
+    architectureWidth: 977,
+    architectureHeight: 619,
     architectureAlt: 'KT Cloud Kubernetes 기반 GIS·3D 건물정보 서비스 아키텍처',
     images: [],
   },
   {
     slug: 'public-data-open-api',
-    priority: 4,
+    cover: { icon: 'database', title: '공공데이터 Open API', subtitle: '온프레미스 배포 · 조회 성능 개선' },
     experience: '실무',
     status: '담당 서비스 배포·운영 및 특정 조회 개선',
     outcome: '해당 대용량 조회 시간 1분 이상 → 3초 이하',
@@ -195,7 +206,7 @@ const projectItems = [
   },
   {
     slug: 'national-park-databank',
-    priority: 5,
+    cover: { icon: 'server', title: '데이터 파일 제공', subtitle: 'CSV 분할 · 저장 공간 관리' },
     experience: '실무',
     status: '파일 제공·저장 공간 유지보수 담당',
     outcome: '파일 저장 디렉터리 사용률 약 98% → 20%',
@@ -237,7 +248,6 @@ const projectItems = [
   },
   {
     slug: 'streaming-partner',
-    priority: 6,
     experience: '대학 프로젝트',
     status: '팀 프로젝트 · 백엔드·배포 환경 담당',
     tone: 'cyan',
@@ -283,20 +293,13 @@ const projectItems = [
       { label: 'Spring 백엔드 배포 Workflow', url: 'https://github.com/IMjaeyongpark/MyBroadcastPartner-Spring/blob/main/.github/workflows/main.yml', description: '빌드 결과물을 S3에 저장하고 CodeDeploy에 배포를 요청하는 구성' },
     ],
     architecture: streamingPartnerArchitecture,
+    architectureOptimized: streamingOptimized,
+    architectureThumbnail: streamingThumbnail,
+    architectureWidth: 5671,
+    architectureHeight: 3803,
     architectureAlt: 'AWS 기반 나의 방송파트너 서비스 아키텍처',
     images: [],
   },
 ]
 
-export const projects = [...projectItems].sort((a, b) => {
-  const priorityDifference = (a.priority ?? Number.MAX_SAFE_INTEGER) - (b.priority ?? Number.MAX_SAFE_INTEGER)
-  if (priorityDifference !== 0) return priorityDifference
-
-  const aDates = getPeriodDates(a.period)
-  const bDates = getPeriodDates(b.period)
-  const endDateDifference = (bDates.at(-1) ?? 0) - (aDates.at(-1) ?? 0)
-
-  if (endDateDifference !== 0) return endDateDifference
-
-  return (bDates[0] ?? 0) - (aDates[0] ?? 0)
-})
+export const projects = sortProjects(projectItems)
