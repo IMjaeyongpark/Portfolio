@@ -15,14 +15,14 @@ const projectItems = [
   {
     slug: 'hyper-v-iac',
     experience: '사내 테스트',
-    status: '사내 테스트 서버에 도입해 사용 테스트 중',
-    outcome: '서버 준비 과정을 코드로 재사용 · 사용 테스트 중',
+    status: '사내 3개 프로젝트의 테스트 서버로 사용 중',
+    outcome: '총 3개 프로젝트의 테스트 서버를 Terraform으로 생성해 사용 중',
     tone: 'blue',
     title: 'Hyper-V 테스트 VM 생성·설정 자동화',
-    description: '반복하던 WEB·WAS·DB VM 준비를 코드로 재사용하도록 구성하고 사내 테스트 서버에 도입했습니다.',
+    description: '반복하던 WEB·WAS·DB VM 준비를 코드로 재사용하도록 구성했습니다. 현재 총 3개 프로젝트의 테스트 서버를 Terraform으로 생성해 사용 중입니다.',
     period: '2026.08 — 2026.09',
     skills: ['Hyper-V', 'Rocky Linux', 'Terraform', 'Ansible', 'Packer', 'PowerShell', 'IaC'],
-    purpose: '신규 프로젝트마다 수동으로 준비하던 WEB·WAS·DB 테스트 VM의 생성과 초기 설정을 자동화했습니다. 서버 사양과 설정을 코드로 재사용할 수 있도록 구성했으며, 현재 사내 테스트 서버에 도입해 사용 테스트 중입니다.',
+    purpose: '신규 프로젝트마다 수동으로 준비하던 WEB·WAS·DB 테스트 VM의 생성과 초기 설정을 자동화했습니다. 서버 사양과 설정을 코드로 재사용할 수 있도록 구성했으며, 현재 총 3개 프로젝트의 테스트 서버를 Terraform으로 생성해 사용 중입니다.',
     role: [
       'Terraform·PowerShell 기반 VM 생성·변경·삭제 자동화',
       'Packer 기본 이미지와 Ansible 초기 설정 구성',
@@ -41,7 +41,7 @@ const projectItems = [
       {
         problem: '프로젝트마다 VM 생성과 OS 초기 설정을 반복해야 했고, 서버별 사양과 설정을 한곳에서 관리할 필요가 있었습니다.',
         solution: '공통 OS 설정은 기본 이미지로 준비하고, 프로젝트별 사양과 IP는 servers.yml에 선언해 VM 생성과 Ansible 설정으로 이어지도록 구성했습니다.',
-        result: '서버 준비 과정을 코드로 재사용할 수 있게 했습니다. 현재 사내 테스트 서버에서 VM 생성·설정·삭제 흐름을 사용 테스트 중입니다.',
+        result: '서버 준비 과정을 코드로 재사용할 수 있게 했습니다. 현재 총 3개 프로젝트의 테스트 서버를 Terraform으로 생성해 사용 중입니다.',
       },
     ],
     evidenceNote: '공개 템플릿은 Terraform Provider 기반이며, 로컬 테스트 버전의 Terraform·PowerShell 구성과 차이가 있습니다. 공개 자료에는 로컬 버전의 VM 보호 로직과 모의 테스트 실행 결과가 포함되어 있지 않습니다.',

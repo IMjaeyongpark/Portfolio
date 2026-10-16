@@ -8,7 +8,7 @@ export const careerItems = [
       {
         title: 'Hyper-V 테스트 VM 생성·설정 자동화',
         period: '2026.08 — 2026.09',
-        description: '프로젝트마다 반복하던 VM 생성과 초기 설정을 Packer·Terraform·Ansible로 자동화했습니다. 현재 사내 테스트 서버에 도입해 사용 테스트 중입니다.',
+        description: '프로젝트마다 반복하던 VM 생성과 초기 설정을 Packer·Terraform·Ansible로 자동화했습니다. 현재 총 3개 프로젝트의 테스트 서버를 Terraform으로 생성해 사용 중입니다.',
       },
       {
         title: '국립공원 데이터뱅크 플랫폼 하자보수',
