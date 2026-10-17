@@ -11,7 +11,7 @@ export const portfolio = {
     { title: '실무 · 배포 환경 이전', description: 'Docker Compose 서비스를 KT Cloud Kubernetes·Helm으로 이전' },
     { title: '사내 테스트 · VM 자동화', description: '총 3개 프로젝트의 테스트 서버를 Terraform으로 생성해 사용 중' },
     { title: '개인 프로젝트 · GitOps', description: 'Jenkins 빌드와 Nexus 이미지 저장을 Argo CD 배포로 연결' },
-    { title: '실무 · 운영 문제 개선', description: '대용량 조회 타임아웃과 파일 저장 공간 부족 문제 대응' },
+    { title: '실무 · 운영 문제 개선', description: '망 분리 환경의 API 연동과 파일 저장 공간 부족 문제 대응' },
   ],
   github: 'https://github.com/IMjaeyongpark',
   links: [

@@ -3,7 +3,7 @@ export const careerItems = [
     organization: '(주)제타럭스시스템',
     role: 'Backend & DevOps Engineer',
     period: '2025.10 — 재직 중',
-    summary: '공공·공간정보 서비스의 배포·운영, Kubernetes 이전과 테스트 VM 생성 자동화를 담당했습니다. 백엔드 개발 경험을 바탕으로 API 연동·조회 성능·저장 공간 문제에도 대응했습니다.',
+    summary: '공공·공간정보 서비스의 배포·운영, Kubernetes 이전과 테스트 VM 생성 자동화를 담당했습니다. 백엔드 개발 경험을 바탕으로 API 연동과 저장 공간 문제에도 대응했습니다.',
     experiences: [
       {
         title: 'Hyper-V 테스트 VM 생성·설정 자동화',
@@ -21,9 +21,9 @@ export const careerItems = [
         description: '온프레미스 MSA의 클라우드 이전 업무에서 Docker Compose 설정 분석, Kubernetes 리소스·Helm 차트 작성과 KT Cloud 배포를 담당했습니다.',
       },
       {
-        title: '공공데이터 Open API 배포·운영 및 성능 개선',
+        title: '공공데이터 Open API 배포·운영',
         period: '2025.10 — 2026.05',
-        description: '온프레미스 배포와 API 중계를 담당하고, PostgreSQL 인덱스 적용으로 504 타임아웃이 발생하던 특정 조회를 1분 이상에서 3초 이하로 줄였습니다.',
+        description: 'Docker·Rocky Linux 기반 온프레미스 배포·운영과 Nginx API 중계를 담당했습니다. DMZ·내부망 사이의 API 연동을 구성하고 포트·방화벽 설정을 점검했습니다.',
       },
     ],
   },
