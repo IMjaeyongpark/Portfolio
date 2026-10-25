@@ -33,7 +33,7 @@ export default function App() {
       ? miniProjects.find((item) => item.slug === slug)
       : null
   const isMiniProject = project && miniProjects.some((item) => item.slug === project.slug)
-  const isProjectRoute = type === 'projects' || isMiniProject
+  const isProjectRoute = type === 'projects' || isMiniProjectRoute
 
   return (
     <div className="min-h-screen overflow-x-clip bg-white text-ink">

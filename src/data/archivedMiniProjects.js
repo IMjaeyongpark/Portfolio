@@ -3,6 +3,51 @@
 // miniProjectItems 배열에 ...archivedMiniProjects를 추가하세요.
 export const archivedMiniProjects = [
   {
+    slug: 'fullstack-board',
+    cover: { icon: 'devops', title: '게시판·배포 자동화', subtitle: 'Jenkins · Docker · Spring Boot' },
+    experience: '개인 프로젝트',
+    icon: '📜',
+    tone: 'blue',
+    title: '게시판 서비스 개발 및 CI/CD 구축',
+    description: '게시판의 로그인 유지를 위한 토큰 재발급과 코드 변경에 따른 빌드·배포 자동화를 구현했습니다.',
+    period: '2025.06.13 — 2025.08.04',
+    skills: ['Jenkins', 'Docker', 'AWS EC2', 'Spring Boot', 'JPA', 'React', 'MySQL', 'Redis'],
+    status: '개인 구축 완료',
+    purpose: '게시판 기능을 직접 개발하고 CI/CD와 토큰 인증 흐름을 연결해 본 개인 프로젝트입니다.',
+    role: [
+      '백엔드 개발 — Spring Boot 게시판 API 구현 및 React 화면 연동',
+      '배포 자동화 — Docker·Jenkins·AWS EC2 기반 CI/CD 파이프라인 구축',
+      '인증 구현 — JWT·토큰 재발급 및 인증 전용 페이지 구성',
+      'DB 연동·테스트 — MySQL·Redis 연동 및 JUnit 5 테스트 작성',
+    ],
+    details: [
+      'Jenkins·Docker를 연결해 게시판 서비스를 AWS EC2에 배포하는 파이프라인을 구성했습니다.',
+      '게시글·댓글 CRUD와 파일 첨부, 키워드 검색·페이지 조회를 React 화면에서 API와 연동했습니다.',
+      'Axios 인터셉터로 인증 토큰을 요청에 첨부하고, 만료 응답을 받으면 토큰 재발급 후 요청을 재시도하도록 구성했습니다.',
+      '인증이 필요한 페이지는 로그인 상태를 확인해 접근을 제어하고, 재발급에 실패하면 로그인 화면으로 이동하도록 처리했습니다.',
+    ],
+    challenges: [
+      {
+        problem: '여러 API 요청에서 동시에 토큰 만료 응답을 받는 경우, 재발급 요청이 중복되지 않도록 처리할 필요가 있었습니다.',
+        solution: '재발급 진행 상태를 관리하고, 그동안 들어온 요청은 대기시켰다가 새 토큰이 발급되면 재시도하도록 구성했습니다.',
+        result: '재발급이 성공하면 대기 중인 요청도 새 Access Token으로 이어서 처리할 수 있게 했습니다.',
+      },
+    ],
+    troubleshooting: [],
+    architecture: '',
+    architectureAlt: '',
+    images: [],
+    links: [
+      // 공개 접근에서 404 응답. 주소는 보관하고 링크 UI에서는 제외합니다.
+      { label: 'Backend', url: 'https://github.com/IMjaeyongpark/JYWeb', available: false },
+      { label: 'Frontend', url: 'https://github.com/IMjaeyongpark/JYWeb_front', available: false },
+    ],
+    evidence: [
+      { label: 'Jenkins 배포 파이프라인', url: 'https://github.com/IMjaeyongpark/JYWeb/blob/main/Jenkinsfile', description: 'Gradle 빌드, Docker 이미지 저장과 컨테이너 배포 구성', available: false },
+      { label: '토큰 재발급 처리', url: 'https://github.com/IMjaeyongpark/JYWeb_front/blob/main/src/api/axiosInstance.js', description: '재발급 진행 상태와 대기 요청의 재시도 처리', available: false },
+    ],
+  },
+  {
     slug: 'dlmo-api',
     cover: { icon: 'database', title: '생체리듬 예측 API', subtitle: 'Node.js · PostgreSQL' },
     experience: '연구·학습',

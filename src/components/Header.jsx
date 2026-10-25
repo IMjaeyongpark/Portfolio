@@ -130,7 +130,12 @@ export default function Header() {
         if (scrollUnlockTimerRef.current) window.clearTimeout(scrollUnlockTimerRef.current)
       }
 
-      const activeItem = [...navigation].reverse().find((item) => {
+      const lastItem = navigation.at(-1)
+      const lastSection = document.querySelector(lastItem.href)
+      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
+      const activeItem = atBottom && lastSection?.getBoundingClientRect().top < window.innerHeight
+        ? lastItem
+        : [...navigation].reverse().find((item) => {
         const section = document.querySelector(item.href)
         return section && section.getBoundingClientRect().top <= 120
       })

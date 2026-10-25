@@ -3,9 +3,10 @@ import SkillBadge from './SkillBadge'
 import ProjectImage from './ProjectImage'
 import ProjectCover from './ProjectCover'
 import ProjectOutcome from './ProjectOutcome'
+import ProjectPeriod from './ProjectPeriod'
 
 export default function ProjectCard({ project, label = 'PROJECT', basePath = 'projects' }) {
-  const projectLinks = project.links ?? (project.github ? [{ label: 'GitHub', url: project.github }] : [])
+  const projectLinks = (project.links ?? (project.github ? [{ label: 'GitHub', url: project.github }] : [])).filter((link) => link.available !== false)
   const detailHref = `/${basePath}/${project.slug}`
 
   return (
@@ -15,7 +16,7 @@ export default function ProjectCard({ project, label = 'PROJECT', basePath = 'pr
         {project.architecture ? <ProjectImage src={project.architecture} optimizedSrc={project.architectureThumbnail || project.architectureOptimized} alt="" width={project.architectureWidth} height={project.architectureHeight} pictureClassName="block h-full w-full" className="h-full w-full object-contain" /> : <ProjectCover project={project} />}
       </div>
       <div className="flex flex-1 flex-col break-keep p-6 [overflow-wrap:anywhere]">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 text-[13px] leading-5"><span className="experience-badge">{project.experience || label}</span><span className="tabular-nums text-muted">{project.period}</span></div>
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-x-3 gap-y-2 text-[13px] leading-5"><span className="experience-badge">{project.experience || label}</span><ProjectPeriod period={project.period} maintenancePeriod={project.maintenancePeriod} align="right" /></div>
         <h3 className="text-xl leading-snug font-bold tracking-[-0.02em] text-ink">{project.title}</h3>
         {project.status && project.status !== project.experience && <p className="mt-2 text-sm leading-6 text-muted">{project.status}</p>}
         <p className="mt-3 text-[15px] leading-7 text-muted">{project.description}</p>

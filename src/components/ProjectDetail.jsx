@@ -4,6 +4,7 @@ import Reveal from './Reveal'
 import SkillBadge from './SkillBadge'
 import ProjectImage from './ProjectImage'
 import ProjectOutcome from './ProjectOutcome'
+import ProjectPeriod from './ProjectPeriod'
 
 function DetailSection({ id, title, children }) {
   return (
@@ -17,22 +18,23 @@ function DetailSection({ id, title, children }) {
 }
 
 export default function ProjectDetail({ project, backHref = '/#projects' }) {
-  const projectLinks = project.links ?? (project.github ? [{ label: 'Repository', url: project.github }] : [])
+  const projectLinks = (project.links ?? (project.github ? [{ label: 'Repository', url: project.github }] : [])).filter((link) => link.available !== false)
+  const evidence = (project.evidence ?? []).filter((source) => source.available !== false)
   const caseSections = [
     { key: 'challenges', title: '해결 과제', problemLabel: '과제', solutionLabel: '접근 방법', problemClass: 'text-muted', items: project.challenges },
     { key: 'troubleshooting', title: '트러블슈팅', problemLabel: '발생한 문제', solutionLabel: '해결 방법', problemClass: 'text-red-700', items: project.troubleshooting },
   ].filter((section) => section.items?.length > 0)
   const summarySections = [
     { key: 'achievements', title: '성과', items: project.achievements },
-    { key: 'improvements', title: '향후 개선', items: project.improvements },
+    { key: 'improvements', title: '한계·개선 계획', items: project.improvements },
   ].filter((section) => section.items?.length > 0)
   const sections = [
-    { id: 'detail-purpose', title: '프로젝트 목적' },
-    { id: 'detail-role', title: '담당 역할' },
-    { id: 'detail-implementation', title: '주요 구현' },
+    ...(project.purpose ? [{ id: 'detail-purpose', title: '프로젝트 목적' }] : []),
+    ...(project.role?.length ? [{ id: 'detail-role', title: '담당 역할' }] : []),
+    ...(project.details?.length ? [{ id: 'detail-implementation', title: '주요 구현' }] : []),
     ...caseSections.map((section) => ({ id: `detail-${section.key}`, title: section.title })),
     ...summarySections.map((section) => ({ id: `detail-${section.key}`, title: section.title })),
-    ...(project.evidence?.length ? [{ id: 'detail-evidence', title: '코드·설정 자료' }] : []),
+    ...(evidence.length ? [{ id: 'detail-evidence', title: '코드·설정 자료' }] : []),
   ]
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
             <Reveal>
               <div className="mt-7 flex flex-wrap items-center gap-4 text-sm">
                 {project.experience && <span className="experience-badge">{project.experience}</span>}
-                <p className="tabular-nums text-muted">{project.period}</p>
+                <ProjectPeriod period={project.period} maintenancePeriod={project.maintenancePeriod} />
               </div>
               <h1 id="project-detail-title" className="mt-4 max-w-4xl text-3xl leading-tight font-bold tracking-[-0.025em] text-ink sm:text-5xl">{project.title}</h1>
               {project.status && <p className="mt-4 text-sm leading-6 font-medium text-muted">{project.status}</p>}
@@ -83,9 +85,9 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
           )}
 
           <div>
-            <DetailSection id="detail-purpose" title="프로젝트 목적"><p>{project.purpose}</p></DetailSection>
-            <DetailSection id="detail-role" title="담당 역할"><ul className="space-y-2">{project.role.map((item) => <li key={item} className="flex gap-3"><span className="mt-3.5 size-1 shrink-0 rounded-full bg-accent" />{item}</li>)}</ul></DetailSection>
-            <DetailSection id="detail-implementation" title="주요 구현">
+            {project.purpose && <DetailSection id="detail-purpose" title="프로젝트 목적"><p>{project.purpose}</p></DetailSection>}
+            {project.role?.length > 0 && <DetailSection id="detail-role" title="담당 역할"><ul className="space-y-2">{project.role.map((item) => <li key={item} className="flex gap-3"><span className="mt-3.5 size-1 shrink-0 rounded-full bg-accent" />{item}</li>)}</ul></DetailSection>}
+            {project.details?.length > 0 && <DetailSection id="detail-implementation" title="주요 구현">
               {project.workflow?.length > 0 && (
                 <ol aria-label="구현 흐름" className="mb-6 flex flex-wrap items-center gap-2">
                   {project.workflow.map((step, index) => (
@@ -96,8 +98,12 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
                   ))}
                 </ol>
               )}
-              <ul className="space-y-4">{project.details.map((item) => <li key={item} className="flex gap-3"><span className="mt-3.5 size-1 shrink-0 rounded-full bg-accent" /><span>{item.split(/(파이프라인|Jenkinsfile)/g).map((part, index) => /^(파이프라인|Jenkinsfile)$/.test(part) ? <strong key={index} className="font-semibold text-ink">{part}</strong> : part)}</span></li>)}</ul>
-            </DetailSection>
+              <ul className="space-y-5">{project.details.map((item) => {
+                const text = typeof item === 'string' ? item : item.text
+                const sources = (typeof item === 'string' ? [] : item.sources ?? []).map((id) => evidence.find((source) => source.id === id)).filter(Boolean)
+                return <li key={text} className="flex gap-3"><span className="mt-3.5 size-1 shrink-0 rounded-full bg-accent" /><div className="min-w-0"><p>{text.split(/(파이프라인|Jenkinsfile)/g).map((part, index) => /^(파이프라인|Jenkinsfile)$/.test(part) ? <strong key={index} className="font-semibold text-ink">{part}</strong> : part)}</p>{sources.length > 0 && <div className="mt-1 flex flex-wrap gap-x-5">{sources.map((source) => <a key={source.id} href={source.url} target="_blank" rel="noreferrer" className="focus-ring text-link underline decoration-line hover:decoration-current">{source.shortLabel || source.label}<Icon name="external" size={13} className="shrink-0" /><span className="sr-only"> (새 탭에서 열기)</span></a>)}</div>}</div></li>
+              })}</ul>
+            </DetailSection>}
             {caseSections.map((section) => (
               <DetailSection key={section.key} id={`detail-${section.key}`} title={section.title}>
                 <div className="divide-y divide-line">
@@ -117,11 +123,12 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
                 <ul className="space-y-3">{section.items.map((item) => <li key={item} className="flex gap-3"><span className="mt-3.5 size-1 shrink-0 rounded-full bg-accent" />{item}</li>)}</ul>
               </DetailSection>
             ))}
-            {project.evidence?.length > 0 && (
+            {evidence.length > 0 && (
               <DetailSection id="detail-evidence" title="코드·설정 자료">
                 {project.evidenceNote && <p className="mb-4 text-muted">{project.evidenceNote}</p>}
+                {project.evidenceScope?.length > 0 && <dl className="mb-6 space-y-4">{project.evidenceScope.map((scope) => <div key={scope.title}><dt className="text-sm font-semibold text-ink">{scope.title}</dt><dd className="mt-1 text-base leading-7 text-muted">{scope.description}</dd></div>)}</dl>}
                 <ul className="grid gap-x-6 sm:grid-cols-2">
-                  {project.evidence.map((source) => (
+                  {evidence.map((source) => (
                     <li key={source.url} className="min-w-0">
                       <a href={source.url} target="_blank" rel="noreferrer" className="focus-ring evidence-link block h-full border-b border-line py-4">
                         <span className="evidence-label flex items-start justify-between gap-3 font-semibold text-ink">{source.label}<Icon name="external" size={15} className="mt-1 shrink-0 text-muted" /></span>

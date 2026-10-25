@@ -1,6 +1,7 @@
 import { careerItems } from '../data/career'
 import Icon from './Icon'
 import Reveal from './Reveal'
+import ProjectPeriod from './ProjectPeriod'
 
 export default function Career() {
   return (
@@ -30,7 +31,7 @@ export default function Career() {
                     <li key={`${experience.title}-${experience.period}`} className="relative">
                       <span className="absolute top-1.5 -left-[1.78rem] size-2.5 rounded-full border-2 border-white bg-lime ring-1 ring-blue-200" />
                       <Reveal animate>
-                        <p className="text-sm font-medium tabular-nums text-accent">{experience.period}</p>
+                        <div className="text-sm font-medium"><ProjectPeriod period={experience.period} maintenancePeriod={experience.maintenancePeriod} /></div>
                         <h4 className="mt-1.5 text-base font-semibold tracking-[-0.02em] text-ink">{experience.title}</h4>
                         <p className="mt-2 text-base leading-7 text-muted">{experience.description}</p>
                       </Reveal>
