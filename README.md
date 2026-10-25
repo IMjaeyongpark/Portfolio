@@ -78,6 +78,7 @@ src/
 │   ├── skills.js          # 기술 카테고리와 기술 목록
 │   ├── projects.js        # 주요 프로젝트
 │   ├── miniProjects.js    # 미니 프로젝트
+│   ├── archivedMiniProjects.js # 미노출 프로젝트 원본·복구 안내
 │   ├── aiEnvironment.js   # AI 작업 환경 소개·구성·실행 절차
 │   └── career.js          # 경력
 ├── App.jsx
@@ -93,6 +94,7 @@ src/
 | 기술 카테고리와 기술 | `src/data/skills.js` |
 | 주요 프로젝트 | `src/data/projects.js` |
 | 미니 프로젝트 | `src/data/miniProjects.js` |
+| 미노출 프로젝트 보관 | `src/data/archivedMiniProjects.js` |
 | 경력 | `src/data/career.js` |
 | AI 작업 환경·템플릿 GitHub·작업 절차 | `src/data/aiEnvironment.js` |
 | 아키텍처·파이프라인·스크린샷 | `src/assets/projects/` |
@@ -102,6 +104,19 @@ src/
 상단 메뉴는 `Home · Skills · Projects · Career · AI Workspace`로 구성됩니다. `Projects` 메뉴는 주요 프로젝트와 미니 프로젝트를 함께 가리키며, 각 카드 전체를 선택하면 상세 페이지로 이동합니다.
 
 ## 프로젝트 추가
+
+주요 프로젝트는 지하철 데이터 Open API 개방(2026.08 — 진행 중), Hyper-V, GitOps 배포 파이프라인, 발전소 데이터 Open API 개방, 나의 방송파트너입니다. GIS·3D 건물정보와 국립공원 데이터뱅크는 미니 프로젝트에 포함됩니다. 발전소 데이터 프로젝트는 배포·운영(2025.10 — 2025.12)과 이어지는 하자보수(2026.01 — 진행 중)를 한 항목에서 관리합니다. `sortPeriod`는 표시 기간과 별개로 정렬에 사용할 기간이며, 발전소 데이터는 기존 배포·운영 기간을 기준으로 위치를 유지합니다. 이전 상세 주소로 접근해도 이동한 프로젝트를 확인할 수 있습니다.
+
+DLMO와 지하철 최단 경로는 `src/data/archivedMiniProjects.js`에 원본을 보관하며, 현재 목록과 상세 페이지에는 노출하지 않습니다. 복구하려면 `miniProjects.js`에서 다음과 같이 가져오고 `miniProjectItems` 배열에 추가하세요. 개별 복구는 해당 객체만 `miniProjectItems`로 옮기면 됩니다.
+
+```js
+import { archivedMiniProjects } from './archivedMiniProjects'
+
+const miniProjectItems = [
+  ...archivedMiniProjects,
+  // 기존 미니 프로젝트 객체들
+]
+```
 
 `projects.js` 또는 `miniProjects.js`의 배열에 다음 객체를 추가합니다. 두 영역은 동일한 데이터 구조와 UI 템플릿을 사용합니다.
 

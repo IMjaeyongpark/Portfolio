@@ -26,12 +26,13 @@ export default function App() {
   }, [])
 
   const [, type, slug] = window.location.pathname.split('/')
-  const isMiniProject = type === 'mini-projects'
+  const isMiniProjectRoute = type === 'mini-projects'
   const project = type === 'projects'
-    ? projects.find((item) => item.slug === slug)
-    : isMiniProject
+    ? projects.find((item) => item.slug === slug) ?? miniProjects.find((item) => item.slug === slug)
+    : isMiniProjectRoute
       ? miniProjects.find((item) => item.slug === slug)
       : null
+  const isMiniProject = project && miniProjects.some((item) => item.slug === project.slug)
   const isProjectRoute = type === 'projects' || isMiniProject
 
   return (
