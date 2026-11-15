@@ -5,6 +5,7 @@ import SkillBadge from './SkillBadge'
 import ProjectImage from './ProjectImage'
 import ProjectOutcome from './ProjectOutcome'
 import ProjectPeriod from './ProjectPeriod'
+import ProjectEvidence from './ProjectEvidence'
 
 function DetailSection({ id, title, children }) {
   return (
@@ -20,6 +21,7 @@ function DetailSection({ id, title, children }) {
 export default function ProjectDetail({ project, backHref = '/#projects' }) {
   const projectLinks = (project.links ?? (project.github ? [{ label: 'Repository', url: project.github }] : [])).filter((link) => link.available !== false)
   const evidence = (project.evidence ?? []).filter((source) => source.available !== false)
+  const hasEvidence = evidence.length > 0 || project.versionInfo?.length > 0
   const caseSections = [
     { key: 'challenges', title: '해결 과제', problemLabel: '과제', solutionLabel: '접근 방법', problemClass: 'text-muted', items: project.challenges },
     { key: 'troubleshooting', title: '트러블슈팅', problemLabel: '발생한 문제', solutionLabel: '해결 방법', problemClass: 'text-red-700', items: project.troubleshooting },
@@ -34,7 +36,7 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
     ...(project.details?.length ? [{ id: 'detail-implementation', title: '주요 구현' }] : []),
     ...caseSections.map((section) => ({ id: `detail-${section.key}`, title: section.title })),
     ...summarySections.map((section) => ({ id: `detail-${section.key}`, title: section.title })),
-    ...(evidence.length ? [{ id: 'detail-evidence', title: '코드·설정 자료' }] : []),
+    ...(hasEvidence ? [{ id: 'detail-evidence', title: '코드·설정 자료' }] : []),
   ]
 
   useEffect(() => {
@@ -123,21 +125,9 @@ export default function ProjectDetail({ project, backHref = '/#projects' }) {
                 <ul className="space-y-3">{section.items.map((item) => <li key={item} className="flex gap-3"><span className="mt-3.5 size-1 shrink-0 rounded-full bg-accent" />{item}</li>)}</ul>
               </DetailSection>
             ))}
-            {evidence.length > 0 && (
+            {hasEvidence && (
               <DetailSection id="detail-evidence" title="코드·설정 자료">
-                {project.evidenceNote && <p className="mb-4 text-muted">{project.evidenceNote}</p>}
-                {project.evidenceScope?.length > 0 && <dl className="mb-6 space-y-4">{project.evidenceScope.map((scope) => <div key={scope.title}><dt className="text-sm font-semibold text-ink">{scope.title}</dt><dd className="mt-1 text-base leading-7 text-muted">{scope.description}</dd></div>)}</dl>}
-                <ul className="grid gap-x-6 sm:grid-cols-2">
-                  {evidence.map((source) => (
-                    <li key={source.url} className="min-w-0">
-                      <a href={source.url} target="_blank" rel="noreferrer" className="focus-ring evidence-link block h-full border-b border-line py-4">
-                        <span className="evidence-label flex items-start justify-between gap-3 font-semibold text-ink">{source.label}<Icon name="external" size={15} className="mt-1 shrink-0 text-muted" /></span>
-                        <span className="mt-2 block text-sm leading-6 text-muted">{source.description}</span>
-                        <span className="sr-only"> (새 탭에서 열기)</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <ProjectEvidence project={project} sources={evidence} />
               </DetailSection>
             )}
           </div>

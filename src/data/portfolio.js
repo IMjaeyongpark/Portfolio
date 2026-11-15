@@ -1,7 +1,7 @@
 export const portfolio = {
   name: '박재용',
   brand: 'PORTFOLIO',
-  role: 'DevOps Engineer · Backend Experience',
+  role: 'Backend Engineer · DevOps Experience',
   intro: '백엔드와 운영 경험을 바탕으로\n배포 환경과 반복 작업을 개선합니다',
   supportingText: '실서비스의 Kubernetes 이전과 운영 문제 개선을 담당했습니다. 사내 3개 프로젝트에 IaC를 적용해 총 8개의 테스트 VM을 생성·관리하고 있으며, 개인 환경에서는 GitOps 배포 흐름을 구축했습니다.',
   projectLinkLabel: '프로젝트 살펴보기',

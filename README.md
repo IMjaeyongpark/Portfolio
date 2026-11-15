@@ -103,11 +103,15 @@ src/
 
 상단 메뉴는 `Home · Skills · Projects · Career · AI Workspace`로 구성됩니다. `Projects` 메뉴는 주요 프로젝트와 미니 프로젝트를 함께 가리키며, 각 카드 전체를 선택하면 상세 페이지로 이동합니다.
 
+카드는 프로젝트 요약과 결과·진행 상태를 먼저 보여줍니다. 담당 역할은 상세 페이지에서 확인하며, 결과 요약이 없는 카드에는 별도 진행 상태를 표시합니다.
+
 AI 작업 환경은 소개와 저장소 링크를 먼저 보여주고, 작업 흐름·구성·작업 규모별 절차는 기본적으로 접어 둡니다. `src/data/aiEnvironment.js`에서 모든 문구를 수정할 수 있습니다.
 
 경력의 프로젝트명과 기간은 `career.js`의 `projectExperience(slug, description)`을 통해 프로젝트 데이터에서 가져옵니다. 구축 기간은 `period`, 별도 하자보수 기간은 `maintenancePeriod`로 작성하면 카드·상세·경력에 함께 반영됩니다.
 
 `details`는 기존 문자열 외에 `{ text, sources: ['evidence-id'] }` 형식도 지원합니다. `evidence` 항목의 `id`와 연결하면 해당 설명 바로 아래에 관련 코드 링크가 표시됩니다. `evidenceScope`는 공개 자료와 사내 구현의 차이, 코드에서 확인 가능한 범위를 설명할 때 사용합니다. 자료가 없는 프로젝트는 해당 필드를 생략합니다. 공개 접근이 불가능한 링크·증빙에는 `available: false`를 지정하면 데이터를 보관하면서 UI에서 제외할 수 있습니다. GitOps·IaC 증빙 링크는 이번에 확인한 커밋으로 고정했으므로 구현을 갱신할 때 링크와 설명도 함께 검토하세요.
+
+`versionInfo`는 `{ title, description }` 목록으로 소스에서 확인한 버전을 기록합니다. `evidence`에 `supplemental: true`를 지정한 보조 링크와 함께 ‘버전·보조 자료 보기’에 접어서 표시됩니다. 주요 구현 링크와 `evidenceScope`의 확인 범위는 항상 표시합니다.
 
 ## 프로젝트 추가
 
@@ -200,6 +204,7 @@ import pipelineImage from '../assets/projects/pipeline.png'
 - 두 항목은 함께 사용할 수 있으며, 생략하거나 `[]`로 지정하면 해당 영역이 숨겨집니다. 표시되는 영역에 따라 번호가 자동으로 이어집니다.
 - `improvements`: 확장 방향이 없으면 생략하거나 `[]`로 지정합니다.
 - `evidenceNote`, `evidence`: ‘코드·설정 자료’에 표시할 설명과 `{ label, url, description }` 링크 목록입니다. 공개 코드·설정·README와 실제 테스트 결과의 범위를 구분합니다. 회사의 비공개 주소·설정·로그는 추가하지 않습니다.
+- `versionInfo`: `{ title, description }` 목록입니다. 확인한 버전 정보이며 기본적으로 접어서 표시합니다. 보조 증빙 링크는 `supplemental: true`로 지정합니다.
 - `achievements`: 논문·수상 등 구현 내용과 구분할 성과를 문자열 배열로 작성합니다. 생략하거나 `[]`로 지정하면 ‘성과’ 영역이 숨겨집니다.
 - `architecture`: 없으면 `''`로 지정합니다.
 - `cover`: 아키텍처 이미지가 없는 카드의 대체 커버입니다. `{ icon: 'database', title: '프로젝트 주제', subtitle: '관련 기술·기능' }` 형식으로 작성합니다. `icon`은 `Icon.jsx`의 아이콘 이름을 사용하며, 생략하면 기본 코드 아이콘·프로젝트명·기술 목록이 표시됩니다. 상세 페이지의 아키텍처 이미지로 사용되지는 않습니다.
