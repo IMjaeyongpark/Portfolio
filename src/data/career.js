@@ -10,7 +10,7 @@ const projectExperience = (slug, description) => {
 export const careerItems = [
   {
     organization: '(주)제타럭스시스템',
-    role: 'Backend & DevOps Engineer',
+    role: '백엔드 개발 · 배포·운영 업무 병행',
     period: '2025.10 — 재직 중',
     summary: '공공·공간정보 서비스의 배포·운영, Kubernetes 이전과 테스트 VM 생성 자동화를 담당했습니다. 백엔드 개발 경험을 바탕으로 API 연동과 저장 공간 문제에도 대응했습니다.',
     experiences: [

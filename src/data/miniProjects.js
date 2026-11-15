@@ -74,7 +74,7 @@ const miniProjectItems = [
     title: '커리어 코치 챗봇 API 개발',
     description: '이력서를 바탕으로 면접 질문과 학습 로드맵을 제공하는 API를 구현했습니다.',
     period: '2025.08.09 — 2025.08.24',
-    skills: ['Spring Boot 3.5.4', 'Java 17', 'JSP', 'Gemini API', 'WebClient'],
+    skills: ['Spring Boot', 'Java', 'JSP', 'Gemini API', 'WebClient'],
     status: '개인 개발 완료',
     role: [
       '백엔드·API 연동 — Spring Boot API·서비스 및 WebClient 기반 Gemini 호출·예외 처리',
